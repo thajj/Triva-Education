@@ -80,14 +80,23 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.only(top: 100),
-                        height: 110,
-                        child: FlutterLogo(
-                          colors: Colors.pink,
-                          size: 110,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+//                          height: MediaQuery.of(context).size.height * 0.3,
+//                          alignment: Alignment(-offset.abs(), 0),
+                          fit: BoxFit.none,
                         ),
                       ),
+//                      Container(
+//                        margin: EdgeInsets.only(top: 100),
+//                        height: 110,
+//                        child: FlutterLogo(
+//                          colors: Colors.pink,
+//                          size: 110,
+//                        ),
+//                      ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 60.0),
+                        margin: EdgeInsets.symmetric(vertical: 20.0),
 //                        padding: EdgeInsets.symmetric(vertical: 60),
                         height: 100,
                         child: Text(
@@ -98,6 +107,9 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 100,
                       ),
                     ],
                   ),
