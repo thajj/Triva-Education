@@ -25,8 +25,6 @@ class ResponsiveWidget extends StatelessWidget {
     });
   }
 
-  //Making these methods static, so that they can be used as accessed from other widgets
-
   //Large screen is any screen whose width is more than 1200 pixels
   static bool isLargeScreen(BuildContext context) {
     return MediaQuery.of(context).size.width > 1200;
@@ -63,8 +61,11 @@ class OrientationSwitcher extends StatelessWidget {
     //Orientation orientation = MediaQuery.of(context).orientation;
 //    return orientation == Orientation.portrait ? Column(children: children) : Row(children: children);
     return Flex(
-        direction: ResponsiveWidget.isSmallScreen(context) && MediaQuery.of(context).orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
-        children: children,
+      direction: ResponsiveWidget.isSmallScreen(context) &&
+              MediaQuery.of(context).orientation == Orientation.portrait
+          ? Axis.vertical
+          : Axis.horizontal,
+      children: children,
     );
   }
 }
