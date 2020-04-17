@@ -30,7 +30,7 @@ class CountDownClipperState extends State<CountDownClipper>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 9),
+      duration: Duration(seconds: 10),
     );
 
     animation =
@@ -42,8 +42,6 @@ class CountDownClipperState extends State<CountDownClipper>
 //        curve: Curves.easeOut,
 //      ),
 //    );
-
-    start();
   }
 
   @override

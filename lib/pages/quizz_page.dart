@@ -60,6 +60,8 @@ class _QuizPageState extends State<QuizPage> {
       _showAnswer = (sharedPrefs.getBool('displayCorrectAnswer') ?? true);
       _isButtonTapped = false;
     });
+
+    _startTimers();
   }
 
   @override
@@ -85,6 +87,7 @@ class _QuizPageState extends State<QuizPage> {
 
     _countDownTimer = CountDownTimer(
       key: _countDownTimerKey,
+      duration: Duration(seconds: 10),
       onComplete: _timeout,
     );
 
@@ -216,8 +219,7 @@ class _QuizPageState extends State<QuizPage> {
 
     Question question = widget.questions[_currentIndex];
 
-    _countDownClipperKey.currentState.stop();
-    _countDownTimerKey.currentState.stop();
+    _pauseTimers();
 
     if (_showAnswer) {
       //if timeout
@@ -300,10 +302,7 @@ class _QuizPageState extends State<QuizPage> {
         _isButtonTapped = false;
       });
 
-      _countDownClipperKey.currentState.reset();
-      _countDownTimerKey.currentState.reset();
-      _countDownClipperKey.currentState.start();
-      _countDownTimerKey.currentState.start();
+      _startTimers();
     } else {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (_) => QuizFinishedPage(
@@ -320,7 +319,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<bool> _onWillPop() async {
-    _pauseQuizz();
+    _pauseTimers();
 
     return showDialog(
       barrierDismissible: true,
@@ -370,7 +369,7 @@ class _QuizPageState extends State<QuizPage> {
                             ),
                             onPressed: () {
                               Navigator.pop(context, false);
-                              _resumeQuizz();
+                              _resumeTimer();
                             },
                           ),
                         ),
@@ -455,12 +454,20 @@ class _QuizPageState extends State<QuizPage> {
 //        });
   }
 
-  _pauseQuizz() {
+  _startTimers() {
+    _countDownClipperKey.currentState.reset();
+    _countDownClipperKey.currentState.start();
+
+    _countDownTimerKey.currentState.reset();
+    _countDownTimerKey.currentState.start();
+  }
+
+  _pauseTimers() {
     _countDownClipperKey.currentState.stop();
     _countDownTimerKey.currentState.stop();
   }
 
-  _resumeQuizz() {
+  _resumeTimer() {
     _countDownClipperKey.currentState.start();
     _countDownTimerKey.currentState.start();
   }

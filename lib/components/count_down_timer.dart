@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class CountDownTimer extends StatefulWidget {
   final Key key;
   final Function onComplete;
+  final Duration duration;
 
-  const CountDownTimer({this.key, this.onComplete}) : super(key: key);
+  CountDownTimer({this.key, this.duration, this.onComplete}) : super(key: key);
 
   @override
   CountDownTimerState createState() => CountDownTimerState();
@@ -15,11 +16,11 @@ class CountDownTimer extends StatefulWidget {
 class CountDownTimerState extends State<CountDownTimer>
     with TickerProviderStateMixin {
   AnimationController controller;
-
   Function listener;
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
+    print(duration.inSeconds);
     return '${(duration.inSeconds).toString()}';
   }
 
@@ -28,8 +29,11 @@ class CountDownTimerState extends State<CountDownTimer>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 9),
-    );
+      duration: widget.duration,
+      reverseDuration: widget.duration,
+    )..addListener(() {
+        this.setState(() {});
+      });
 
     listener = (status) {
       if (status == AnimationStatus.dismissed) {
@@ -37,8 +41,6 @@ class CountDownTimerState extends State<CountDownTimer>
         controller.stop();
       }
     };
-
-    start();
   }
 
   @override
@@ -47,12 +49,16 @@ class CountDownTimerState extends State<CountDownTimer>
     super.dispose();
   }
 
-  void start() {
+  Future<Null> start() async {
     controller.addStatusListener(listener);
-    controller.reverse(from: controller.value == 0.0 ? 1.0 : controller.value);
+    try {
+//      await controller.forward();
+      await controller.reverse(
+          from: controller.value == 0.0 ? 1.0 : controller.value);
+    } on TickerCanceled {}
   }
 
-  void reset() {
+  void reset() async {
     controller.removeStatusListener(listener);
     controller.reset();
   }

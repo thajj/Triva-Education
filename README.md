@@ -1,44 +1,41 @@
-TODO
+# TRIVIA KIDS EDUCATION #
+
+First Native APP develop during Covid-19....
 
 
+## TODO - MUST HAVE ##
 
-# quiz education
-
-- Adjust the category pour support d'image
-- Test APK mobile no network
-- Impletement order control of question
-
-- Sometimes no data is shown (debug if it happen will real APK)
-
-
-- Random test
-- Category test
-- Create profile
-- Add image to category
-- Add setting screen
-    =
-- Implement notification
-
-info.plist device orientation
-
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+- [x] Create data model
+- [x] Build project structure
+- [x] Interface with OpenTBD
+- [x] Category list
+- [x] Quizz page
+- [x] Reult page
+- [x] Verify answer page
+- [ ] Improve the UX of the settings screen
+- [ ] Splash screen
+- [ ] Icon page
+- [ ] Improve page transition
+- [ ] Splash screen - [Tutorial here](https://medium.com/@diegoveloper/flutter-splash-screen-9f4e05542548)
+- [ ] Sound effect
+- [ ] Fix timer
+- [ ] Add game mode (free to play, random, no timer
+- [ ] Add share
+- [ ] Make reponvise
+- [ ] Fix quizz page button overflow issue
+- [ ] Make current question indicator fixed
+- [ ]  Test APK mobile no network
+- [ ]  Block portrait orientation (Especially in mobile device)
 
 
+## TODO - NICE TO HAVE / ROAD MAP ##
+
+* Impleement order control of question
+* Profile support
+* Implement notification
 
 
-
-
-- Test the APK
-- Implement a no network state
-
-# Useful ressources
-
-RESET ANIMATION FROM CODE...
-https://flutterawesome.com/enables-you-to-create-stunning-flutter-animations/
+### Ressources ###
 
 NICE ANIM correct answer animation
 https://medium.com/flutter-community/how-to-create-button-animation-with-flare-in-flutter-part-1-create-your-first-animation-b1c61c81bc1c
