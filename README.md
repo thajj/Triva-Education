@@ -14,7 +14,7 @@ First Native APP develop during Covid-19....
 - [x] Verify answer page
 - [ ] Improve the UX of the settings screen
 - [ ] Splash screen
-- [ ] Icon page
+- [ ] Icon page - [Tutorial here](https://stackoverflow.com/questions/43928702/how-to-change-the-application-launcher-icon-on-flutter)
 - [ ] Improve page transition
 - [ ] Splash screen - [Tutorial here](https://medium.com/@diegoveloper/flutter-splash-screen-9f4e05542548)
 - [ ] Sound effect
@@ -26,6 +26,27 @@ First Native APP develop during Covid-19....
 - [ ] Make current question indicator fixed
 - [ ]  Test APK mobile no network
 - [ ]  Block portrait orientation (Especially in mobile device)
+- [ ] Decide a name of the APP
+
+## Preparing the APP for release
+
+
+- [ ] Onboarding screen
+- [ ] Title + description
+
+### [ANDROID](https://flutter.dev/docs/deployment/android)
+
+- [ ] Bundle package
+- [ ] Deploy for private access
+
+### [IOS](https://flutter.dev/docs/deployment/ios)
+
+- [ ] Sign US docs...
+- [ ] Pay fees for account creation
+- [ ] Validate account for publication...
+- [ ]
+
+
 
 
 ## TODO - NICE TO HAVE / ROAD MAP ##
