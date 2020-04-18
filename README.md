@@ -12,20 +12,16 @@ First Native APP develop during Covid-19....
 - [x] Quizz page
 - [x] Reult page
 - [x] Verify answer page
-- [ ] Improve the UX of the settings screen
-- [ ] Splash screen
-- [ ] Improve page transition
+- [x] Improve page transition
 - [ ] Splash screen - [Tutorial here](https://medium.com/@diegoveloper/flutter-splash-screen-9f4e05542548)
-- [ ] Sound effect
+- [x] Sound effect
 - [ ] Fix timer
-- [ ] Add game mode (free to play, random, no timer
 - [ ] Add share
 - [ ] Add rate App
-- [ ] Extract legend
-- [ ] Make reponsvive
+- [x] Make reponsvive
 - [x] Improve UX of the category
-- [ ] Fix quizz page button overflow issue
-- [ ] Make current question indicator fixed
+- [x] Fix quizz page button overflow issue
+- [x] Make current question indicator fixed
 - [ ] Test APK mobile no network
 - [x] Block portrait orientation (Especially in mobile device)
 
@@ -55,6 +51,9 @@ First Native APP develop during Covid-19....
 
 ## TODO - NICE TO HAVE / ROAD MAP ##
 
+* Add game mode (free to play, random, no timer
+* Improve the UX of the settings screen
 * Impleement order control of question
 * Profile support
 * Implement notification
+* Extract legend

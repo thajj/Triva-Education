@@ -101,87 +101,125 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(
                 fontSize: 20.0,
               )),
-          elevation: 10,
+          elevation: 4,
           actions: <Widget>[
             Container(
                 padding: EdgeInsets.only(top: 8, right: 16, bottom: 8, left: 4),
                 child: _countDownTimer),
           ],
         ),
-        body: Stack(
-          children: <Widget>[
-            Visibility(
-              visible: true,
-              child: CountDownClipper(
-                  key: _countDownClipperKey,
-                  maxHeight: MediaQuery.of(context).size.height),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 10.0),
-                  Row(
+        body: LayoutBuilder(
+          builder: (context, constraints) => Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Visibility(
+                visible: true,
+                child: CountDownClipper(
+                    key: _countDownClipperKey,
+                    maxHeight: MediaQuery.of(context).size.height),
+              ),
+              Positioned(
+                width: constraints.maxWidth,
+                height: _currentIndex % 2 == 0
+                    ? constraints.maxHeight / 2 //3
+                    : constraints.maxHeight / 2,
+                top: 0,
+                child: Container(
+//                  color: Colors.red,
+                  padding:
+                      EdgeInsets.only(top: 20, bottom: 0, left: 12, right: 12),
+                  child: Column(
                     children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white70,
-                        child: Text("${_currentIndex + 1}",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      SizedBox(width: 16.0),
-                      Expanded(
-                        child: Text(
-                          HtmlUnescape().convert(
-                              widget.questions[_currentIndex].question),
-                          softWrap: true,
-                          style: _questionStyle,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20.0),
-                  _currentIndex % 2 == 0
-                      ? Container()
-                      : Image.network(
-                          "https://duckduckgo.com/i/3a758bd3.jpg",
-                          height: 200.0,
-                        ),
-                  new Expanded(
-                    child: new Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          ...options.map((option) => SizedBox(
-                                width: double.infinity,
-                                height: 90.0,
-                                child: Padding(
-                                  padding: EdgeInsets.only(bottom: 16),
-                                  child: RaisedButton(
-                                    color: _showAnswer
-                                        ? btnColorState(option)
-                                        : Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Text(
-                                      HtmlUnescape().convert("$option"),
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    onPressed: () => _isButtonTapped
-                                        ? null
-                                        : _handleAnswerClick(option),
-                                  ),
-                                ),
-                              )),
+                          CircleAvatar(
+                            backgroundColor: Colors.white70,
+                            child: Text("${_currentIndex + 1}",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                          SizedBox(width: 16.0),
+                          Expanded(
+                            child: Text(
+                              HtmlUnescape().convert(
+                                  widget.questions[_currentIndex].question),
+                              softWrap: true,
+                              style: _questionStyle,
+                            ),
+                          ),
                         ],
                       ),
+                      _currentIndex % 2 == 0
+                          ? Container()
+                          : Container(
+                              height: constraints.maxHeight / 3 + 10,
+                              padding: EdgeInsets.only(top: 20),
+                              child: Image.network(
+                                "https://duckduckgo.com/i/3a758bd3.jpg",
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+              ),
+//              _currentIndex % 2 == 0
+//                  ? Container()
+//                  : Positioned(
+//                      width: constraints.maxWidth,
+//                      height: constraints.maxHeight / 2 * 2 / 3,
+//                      top: constraints.maxHeight / 6,
+//                      child: Container(
+//                        padding: EdgeInsets.all(12),
+////                        color: Colors.lightBlue,
+//                        child: Image.network(
+//                          "https://duckduckgo.com/i/3a758bd3.jpg",
+//                          fit: BoxFit.fitHeight,
+//                        ),
+//                      ),
+//                    ),
+              Positioned(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight / 2,
+                top: constraints.maxHeight / 2,
+                child: Container(
+//                    color: Colors.black,
+                    child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ...options.map((option) => SizedBox(
+                              width: double.infinity,
+                              height: 78.0,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 12),
+                                child: RaisedButton(
+                                  color: _showAnswer
+                                      ? btnColorState(option)
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Text(
+                                    HtmlUnescape().convert("$option"),
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  onPressed: () => _isButtonTapped
+                                      ? null
+                                      : _handleAnswerClick(option),
+                                ),
+                              ),
+                            )),
+                      ],
                     ),
                   ),
-                ],
+                )),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
