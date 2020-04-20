@@ -15,18 +15,26 @@ First Native APP develop during Covid-19....
 - [x] Improve page transition
 - [x] Splash screen - [Tutorial here](https://medium.com/@diegoveloper/flutter-splash-screen-9f4e05542548)
 - [x] Sound effect
-- [ ] Fix timer
+- [x] Fix timer
 - [ ] Add share
 - [ ] Add rate App
-- [ ] Make app fullscreen and adjust widget position in quizz page
+- [x] Make app fullscreen and adjust widget position in quizz page
 - [x] Make reponsvive
 - [x] Improve UX of the category
 - [x] Fix quizz page button overflow issue
+- [x] Dont show null when no answer in the Quizz answer
 - [x] Make current question indicator fixed
-- [ ] Test APK mobile no network
 - [x] Block portrait orientation (Especially in mobile device)
+- [x] Notify settings change when there's a change
+- [ ] Bring back color animation (fade out) when refactor is done
+- [ ] i8n for EN
 
-- [x] branch before using the right BO
+
+- [ ] Adapt data model with home Back end - cat + q&A
+- [ ] Add theme support
+- [ ] Test APK mobile no network
+- [ ] Hide home btn in APP bar when before release
+- [ ] branch before using the right BO
 
 ### with vk
 - [ ] Decide a name of the APP

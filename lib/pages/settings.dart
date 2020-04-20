@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quiz/models/setting.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage() {}
+  final Setting setting;
+
+  const SettingsPage({Key key, this.setting}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -21,43 +23,33 @@ class _SettingsPageState extends State<SettingsPage> {
     fontSize: 20.0,
   );
 
-  bool _sound = true;
-  bool _vibration = true;
-  bool _displayCorrectAnswer = true;
+//  bool _sound = true;
+//  bool _vibration = true;
+//  bool _displayCorrectAnswer = true;
 
   @override
   void initState() {
     super.initState();
-    restore();
+//    restore();
   }
 
-  restore() async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    setState(() {
-      _sound = (sharedPrefs.getBool('sound') ?? true);
-      _vibration = (sharedPrefs.getBool('vibration') ?? true);
-      _displayCorrectAnswer =
-          (sharedPrefs.getBool('displayCorrectAnswer') ?? true);
-    });
-  }
-
-  save(String key, dynamic value) async {
-    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
-    if (value is bool) {
-      sharedPrefs.setBool(key, value);
-    } else if (value is String) {
-      sharedPrefs.setString(key, value);
-    } else if (value is int) {
-      sharedPrefs.setInt(key, value);
-    } else if (value is double) {
-      sharedPrefs.setDouble(key, value);
-    } else if (value is List<String>) {
-      sharedPrefs.setStringList(key, value);
-    }
-  }
+//  restore() async {
+//    final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+//    setState(() {
+//      _sound = (sharedPrefs.getBool('sound') ?? true);
+//      _vibration = (sharedPrefs.getBool('vibration') ?? true);
+//      _displayCorrectAnswer =
+//          (sharedPrefs.getBool('displayCorrectAnswer') ?? true);
+//    });
+//  }
 
   @override
   Widget build(BuildContext context) {
+//    Setting setting = ScopedModel.of<Setting>(context, rebuildOnChange: false);
+//    bool sound = ScopedModel.of<Setting>(context, rebuildOnChange: false).sound;
+
+//    print('SOUND ${sound}');
+
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
@@ -88,24 +80,18 @@ class _SettingsPageState extends State<SettingsPage> {
                       SwitchListTile(
                         activeColor: Colors.purple,
                         title: Text("Sons"),
-                        value: _sound,
+                        value: widget.setting.sound,
                         onChanged: (bool value) {
-                          setState(() {
-                            _sound = value;
-                          });
-                          save('sound', value);
+                          widget.setting.sound = value;
                         },
                       ),
                       _buildDivider(),
                       SwitchListTile(
                         activeColor: Colors.purple,
                         title: Text("Vibrations"),
-                        value: _vibration,
+                        value: widget.setting.vibration,
                         onChanged: (bool value) {
-                          setState(() {
-                            _vibration = value;
-                          });
-                          save('vibration', value);
+                          widget.setting.vibration = value;
                         },
                       ),
                       _buildDivider(),
@@ -113,12 +99,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         activeColor: Colors.purple,
                         title: Text(
                             "Afficher les réponses correctes pendant la partie"),
-                        value: _displayCorrectAnswer,
+                        value: widget.setting.showAnswer,
                         onChanged: (bool value) {
-                          setState(() {
-                            _displayCorrectAnswer = value;
-                          });
-                          save('displayCorrectAnswer', value);
+                          widget.setting.showAnswer = value;
                         },
                       ),
                     ],

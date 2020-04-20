@@ -20,7 +20,6 @@ class CountDownTimerState extends State<CountDownTimer>
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
-    print(duration.inSeconds);
     return '${(duration.inSeconds).toString()}';
   }
 
@@ -35,21 +34,30 @@ class CountDownTimerState extends State<CountDownTimer>
         this.setState(() {});
       });
 
+//    print('duration ${widget.duration}');
+
     listener = (status) {
       if (status == AnimationStatus.dismissed) {
-        widget.onComplete();
+        print('TIMEOUT');
+        controller.removeStatusListener(listener);
         controller.stop();
+        widget.onComplete();
       }
     };
+
+//    start();
   }
 
   @override
   void dispose() {
+    print('DISPOSE');
+    controller.removeStatusListener(listener);
     controller.dispose();
     super.dispose();
   }
 
   Future<Null> start() async {
+    print('START');
     controller.addStatusListener(listener);
     try {
 //      await controller.forward();
@@ -59,12 +67,19 @@ class CountDownTimerState extends State<CountDownTimer>
   }
 
   void reset() async {
+    print('RESET');
     controller.removeStatusListener(listener);
     controller.reset();
   }
 
-  void stop() {
+  void pause() async {
+    print('PAUSE');
+    controller.removeStatusListener(listener);
     controller.stop();
+  }
+
+  void stop() {
+    print('STOP');
   }
 
   @override

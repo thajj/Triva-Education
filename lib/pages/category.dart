@@ -13,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   AnimationController _screenController;
   Animation<double> containerGrowAnimation;
   Animation<Color> fadeScreenAnimation;
@@ -68,6 +70,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         return true;
       },
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text('Catégories'),
           elevation: 0,

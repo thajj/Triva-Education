@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:quiz/models/category.dart';
 import 'package:quiz/models/question.dart';
+import 'package:quiz/models/setting.dart';
 import 'package:quiz/pages/quizz_page.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 const String baseUrl = "https://opentdb.com/api.php";
 
@@ -201,12 +203,19 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
         return;
       }
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => QuizPage(
-                    questions: questions,
-                    category: widget.category,
-                  )));
+        context,
+        MaterialPageRoute(
+          builder: (_) => ScopedModelDescendant<Setting>(
+            builder: (context, child, model) {
+              return QuizPage(
+                questions: questions,
+                category: widget.category,
+                setting: model,
+              );
+            },
+          ),
+        ),
+      );
     } on SocketException catch (_) {
       Navigator.pushReplacement(
           context,

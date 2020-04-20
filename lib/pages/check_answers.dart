@@ -64,13 +64,15 @@ class CheckAnswersPage extends StatelessWidget {
                   fontSize: 16.0),
             ),
             SizedBox(height: 5.0),
-            Text(
-              HtmlUnescape().convert("${answers[index]}"),
-              style: TextStyle(
-                  color: correct ? Colors.green : Colors.red,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold),
-            ),
+            Visibility(
+                visible: answers[index] != null,
+                child: Text(
+                  HtmlUnescape().convert("${answers[index]}"),
+                  style: TextStyle(
+                      color: correct ? Colors.green : Colors.red,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold),
+                )),
             SizedBox(height: 5.0),
             correct
                 ? Container()
