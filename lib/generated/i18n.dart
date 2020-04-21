@@ -21,10 +21,24 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  String get tap_to_start => "Tap to start";
+  String get title => "Home";
 }
 
 class $en extends S {
   const $en();
+}
+
+class $fr extends S {
+  const $fr();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get tap_to_start => "Tap to start";
+  @override
+  String get title => "Home";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
@@ -33,6 +47,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale("en", ""),
+      Locale("fr", ""),
     ];
   }
 
@@ -59,6 +74,9 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
       switch (lang) {
         case "en":
           S.current = const $en();
+          return SynchronousFuture<S>(S.current);
+        case "fr":
+          S.current = const $fr();
           return SynchronousFuture<S>(S.current);
         default:
           // NO-OP.

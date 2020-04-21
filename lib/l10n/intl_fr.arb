@@ -1,0 +1,8 @@
+{
+  "title": "Bonjour",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text"
+  },
+  "start_button": "Démarrer"
+}

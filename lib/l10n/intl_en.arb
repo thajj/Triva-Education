@@ -1,0 +1,12 @@
+{
+  "title": "Open Trivia",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text"
+  },
+  "start_button": "Tap to start",
+  "@start_button": {
+    "description": "Label of the stat button",
+    "type": "text"
+  }
+}
