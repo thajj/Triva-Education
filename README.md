@@ -27,17 +27,17 @@ First Native APP develop during Covid-19....
 - [x] Block portrait orientation (Especially in mobile device)
 - [x] Notify settings change when there's a change
 - [x] Bring back color animation (fade out)
-- [ ] Fix timer and wave animation for the first question
+- [X] Fix timers for the first question
 - [x] i8n for EN
 - [ ] Add licence and use logo from openTDB
-- [ ] Add random mode
+- [ ] Add random mode + free to play (no timer)
+- [x] Plum sound effect when tapping some btn
 - [ ] Precached audio file
-- [ ] Plum sound effect when tapping some btn
 - [ ] Move setting to start page
 - [x] Fix splash screen
-- [ ] Animate logo after splash screen ann fade in Open Trivia
+- [ ] Animate logo after splash screen fade in App name + Logo
 - [ ] Update the font of Open Trivia
-- [ ] Centrer Logo in start page
+- [ ] Fix broken wave animation
 
 
 
@@ -86,7 +86,7 @@ First Native APP develop during Covid-19....
 
 https://github.com/nisrulz/flutter-examples
 Google sign in : https://github.com/nisrulz/flutter-examples/tree/master/google_signin
-
+Facebook : https://github.com/roughike/flutter_facebook_login
 
 INTL
 https://github.com/flutter/website/blob/master/examples/internationalization/intl_example/lib/main.dart
