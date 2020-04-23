@@ -296,7 +296,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       }
     }
 
-    //Not answered yet (before timeout)
+    //Not answered yet (before timeout )
     if (_answers[_currentIndex] == null) {
       //if timeout ww will show the correct answer
       return Colors.white;
