@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        title: Text('Paramètres'),
+        title: Text('Settings'),
         elevation: 0,
       ),
       body: Stack(
@@ -79,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     children: <Widget>[
                       SwitchListTile(
                         activeColor: Colors.purple,
-                        title: Text("Sons"),
+                        title: Text("Sound effects"),
                         value: widget.setting.sound,
                         onChanged: (bool value) {
                           widget.setting.sound = value;
@@ -97,8 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       _buildDivider(),
                       SwitchListTile(
                         activeColor: Colors.purple,
-                        title: Text(
-                            "Afficher les réponses correctes pendant la partie"),
+                        title: Text("Show interactive answers"),
                         value: widget.setting.showAnswer,
                         onChanged: (bool value) {
                           widget.setting.showAnswer = value;

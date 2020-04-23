@@ -96,7 +96,7 @@ class Header extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Text(
-        'Trivia - Éducation',
+        'Open Trivia',
         style: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.w600,

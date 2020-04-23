@@ -5,4 +5,8 @@ class Constants {
   String shareText = "TODO";
   String playStoreURL = "http://play.google.com";
   String appStoreURL = "https://apple.com";
+
+  String correctSound = 'sounds/correct.mp3';
+  String incorrectSound = 'sounds/incorrect.mp3';
+  String btnTap = 'sounds/click.mp3';
 }

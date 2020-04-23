@@ -143,7 +143,7 @@ class _TimerPageState extends State<TimerPage>
           AnimatedBuilder(
             animation: _controller,
             builder: (context, child) {
-              return DemoBody(size: size, color: Colors.pink);
+              return DemoBody(size: size);
             },
           ),
           Padding(

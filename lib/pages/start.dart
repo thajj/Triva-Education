@@ -1,6 +1,9 @@
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/services.dart';
+
+import '../constants.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key key}) : super(key: key);
@@ -47,7 +50,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
         width: screenSize.width,
         height: screenSize.height,
         child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
+          alignment: AlignmentDirectional.center,
           children: <Widget>[
             Column(
 //                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +59,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                   margin: EdgeInsets.only(top: 100),
                   child: Image.asset(
                     'assets/images/logo.png',
-                    height: 120,
+                    height: 192,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -64,7 +67,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                   margin: EdgeInsets.symmetric(vertical: 30.0),
                   height: 100,
                   child: Text(
-                    'Trivia - Éducation',
+                    'Open Trivia',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 32,
@@ -82,10 +85,11 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                 ? Padding(
                     padding: const EdgeInsets.only(bottom: 50.0),
                     child: InkWell(
-                      onTap: () {
+                      onTap: () async {
                         setState(() {
                           animationStatus = 1;
                         });
+                        await AudioCache().play(Constants().btnTap);
                         _playAnimation();
                       },
                       child: StartButton(),
@@ -93,22 +97,19 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
                   )
                 : StaggerAnimation(
                     buttonController: _loginButtonController.view),
+//            SizedBox(
+//              height: 100,
+//              child:             IconButton(
+//                icon: Icon(Icons.settings),
+//                onPressed: () => Navigator.pushNamed(context, "/settings"),
+//              ),
+//            ),
           ],
         ),
       ),
     );
   }
 }
-
-//DecorationImage backgroundImage = DecorationImage(
-//  image: ExactAssetImage('assets/login.jpg'),
-//  fit: BoxFit.cover,
-//);
-
-//DecorationImage tick = DecorationImage(
-//  image: ExactAssetImage('assets/tick.png'),
-//  fit: BoxFit.cover,
-//);
 
 class StartButton extends StatelessWidget {
   StartButton();
@@ -124,7 +125,33 @@ class StartButton extends StatelessWidget {
         borderRadius: BorderRadius.all(const Radius.circular(30.0)),
       ),
       child: Text(
-        "Démarrer",
+        "PLAY", //S.of(context).title,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 22.0,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 0.3,
+        ),
+      ),
+    ));
+  }
+}
+
+class RandomButton extends StatelessWidget {
+  RandomButton();
+  @override
+  Widget build(BuildContext context) {
+    return (Container(
+      width: 320.0,
+      height: 60.0,
+      alignment: FractionalOffset.center,
+      decoration: BoxDecoration(
+        color: Colors.pink,
+//        color: const Color.fromRGBO(247, 64, 106, 1.0),
+        borderRadius: BorderRadius.all(const Radius.circular(30.0)),
+      ),
+      child: Text(
+        "RANDOM TEST", //S.of(context).title,
         style: TextStyle(
           color: Colors.white,
           fontSize: 20.0,
@@ -135,22 +162,6 @@ class StartButton extends StatelessWidget {
     ));
   }
 }
-
-//class Tick extends StatelessWidget {
-//  final DecorationImage image;
-//  Tick({this.image});
-//  @override
-//  Widget build(BuildContext context) {
-//    return (Container(
-//      width: 250.0,
-//      height: 250.0,
-//      alignment: Alignment.center,
-//      decoration: BoxDecoration(
-//        image: image,
-//      ),
-//    ));
-//  }
-//}
 
 class StaggerAnimation extends StatelessWidget {
   StaggerAnimation({Key key, this.buttonController})
@@ -233,7 +244,7 @@ class StaggerAnimation extends StatelessWidget {
                     ),
                     child: buttonSqueezeanimation.value > 75.0
                         ? Text(
-                            "Démarrer",
+                            "PLAY",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,

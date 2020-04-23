@@ -28,7 +28,7 @@ class QuizFinishedPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        title: Text('Resultat'),
+        title: Text('Result'),
         elevation: 0,
       ),
       body: Stack(
@@ -50,7 +50,7 @@ class QuizFinishedPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0)),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
-                    title: Text("Nombre de questions", style: titleStyle),
+                    title: Text("Number of questions", style: titleStyle),
                     trailing: Text("${questions.length}", style: trailingStyle),
                   ),
                 ),
@@ -73,7 +73,7 @@ class QuizFinishedPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0)),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
-                    title: Text("Réponses correctes", style: titleStyle),
+                    title: Text("Correct answers", style: titleStyle),
                     trailing: Text("$correct/${questions.length}",
                         style: trailingStyle),
                   ),
@@ -85,13 +85,14 @@ class QuizFinishedPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0)),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
-                    title: Text("Réponses incorrectes", style: titleStyle),
+                    title: Text("Incorrect answers", style: titleStyle),
                     trailing: Text(
                         "${questions.length - correct}/${questions.length}",
                         style: trailingStyle),
                   ),
                 ),
                 SizedBox(height: 20.0),
+                Align(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -119,7 +120,7 @@ class QuizFinishedPage extends StatelessWidget {
                       ),
                       color: Theme.of(context).primaryColor,
                       child: Text(
-                        "Vérifier les réponses",
+                        "Verify answers",
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,

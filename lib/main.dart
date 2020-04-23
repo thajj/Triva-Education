@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quiz/models/setting.dart';
 import 'package:quiz/pages/category.dart';
 import 'package:quiz/pages/settings.dart';
+import 'package:quiz/utils/translations.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import 'generated/i18n.dart';
 import 'models/setting.dart';
 import 'pages/start.dart';
+
+final supportedLocales = const [const Locale('fr', ''), const Locale('en', '')];
+
+final GlobalKey<NavigatorState> _navigatorKey = new GlobalKey<NavigatorState>();
+
+final localizationsDelegates = <LocalizationsDelegate>[
+  const TranslationsDelegate(),
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate
+];
 
 void main() {
   // Admob.initialize("a");
@@ -73,12 +86,13 @@ class MyApp extends StatelessWidget {
     //SystemChrome.setEnabledSystemUIOverlays([]);
 
     settingModel.load();
-
+//    String test = AppLocalizations.of(context).title;
+//    print(test);
     return ScopedModel<Setting>(
       model: settingModel,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Trivia - Éducation',
+        title: 'Open Trivia',
         theme: ThemeData(
             primarySwatch: Colors.pink,
             accentColor: Colors.indigo,
@@ -90,6 +104,17 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 textTheme: ButtonTextTheme.primary)),
+        localizationsDelegates: [
+          S.delegate,
+          ...GlobalMaterialLocalizations.delegates
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+//        supportedLocales: [
+//          const Locale('en', ''),
+////          const Locale('fr', ''),
+//        ],
+        localeResolutionCallback: S.delegate
+            .resolution(fallback: new Locale("en", ""), withCountry: false),
         onGenerateRoute: generateRoute,
         home: StartPage(),
       ),

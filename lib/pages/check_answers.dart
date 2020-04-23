@@ -16,7 +16,7 @@ class CheckAnswersPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        title: Text('Réponses du quizz'),
+        title: Text('Quizz answers'),
         elevation: 0,
       ),
       body: Stack(
@@ -64,6 +64,26 @@ class CheckAnswersPage extends StatelessWidget {
                   fontSize: 16.0),
             ),
             SizedBox(height: 5.0),
+//            Row(children: <Widget>[
+//              correct
+//                  ? Icon(
+//                      Icons.check,
+//                      color: Colors.green,
+//                    )
+//                  : Icon(
+//                      Icons.close,
+//                      color: Colors.red,
+//                    ),
+//              Visibility(
+//                  visible: answers[index] != null,
+//                  child: Text(
+//                    HtmlUnescape().convert("${answers[index]}"),
+//                    style: TextStyle(
+//                        color: correct ? Colors.green : Colors.red,
+//                        fontSize: 18.0,
+//                        fontWeight: FontWeight.bold),
+//                  )),
+//            ]),
             Visibility(
                 visible: answers[index] != null,
                 child: Text(
@@ -73,6 +93,7 @@ class CheckAnswersPage extends StatelessWidget {
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold),
                 )),
+
             SizedBox(height: 5.0),
             correct
                 ? Container()

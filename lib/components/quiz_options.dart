@@ -62,7 +62,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
             ),
           ),
           SizedBox(height: 10.0),
-          Text("Combien de questions?"),
+          Text("How many questions?"),
           SizedBox(
             width: double.infinity,
             child: Wrap(
@@ -116,7 +116,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
             ),
           ),
           SizedBox(height: 20.0),
-          Text("Quelle difficulté?"),
+          Text("Select difficulty"),
           SizedBox(
             width: double.infinity,
             child: Wrap(
@@ -127,7 +127,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
               children: <Widget>[
                 SizedBox(width: 0.0),
                 ActionChip(
-                  label: Text("N'importe!"),
+                  label: Text("Random"),
                   labelStyle: TextStyle(color: Colors.white),
                   backgroundColor: _difficulty == null
                       ? Colors.indigo
@@ -135,7 +135,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
                   onPressed: () => _selectDifficulty(null),
                 ),
                 ActionChip(
-                  label: Text("Facile"),
+                  label: Text("Easy"),
                   labelStyle: TextStyle(color: Colors.white),
                   backgroundColor: _difficulty == "easy"
                       ? Colors.indigo
@@ -143,7 +143,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
                   onPressed: () => _selectDifficulty("easy"),
                 ),
                 ActionChip(
-                  label: Text("Moyen"),
+                  label: Text("Medium"),
                   labelStyle: TextStyle(color: Colors.white),
                   backgroundColor: _difficulty == "medium"
                       ? Colors.indigo
@@ -151,7 +151,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
                   onPressed: () => _selectDifficulty("medium"),
                 ),
                 ActionChip(
-                  label: Text("Difficile"),
+                  label: Text("Hard"),
                   labelStyle: TextStyle(color: Colors.white),
                   backgroundColor: _difficulty == "hard"
                       ? Colors.indigo
@@ -165,7 +165,7 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
           processing
               ? CircularProgressIndicator()
               : RaisedButton(
-                  child: Text("Démarrer"),
+                  child: Text("START"),
                   onPressed: _startQuiz,
                 ),
           SizedBox(height: 20.0),

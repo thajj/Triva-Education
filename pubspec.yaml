@@ -79,6 +79,7 @@ flutter:
     - assets/cat_shapes.png
     - assets/cat_colors.png
 
+    - assets/sounds/click.mp3
     - assets/sounds/correct.mp3
     - assets/sounds/completed.mp3
     - assets/sounds/incorrect.mp3

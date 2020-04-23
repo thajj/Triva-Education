@@ -2,85 +2,78 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-class CountDownTimer extends StatefulWidget {
-  final Key key;
-  final Function onComplete;
-  final Duration duration;
+class CountDownTimer extends StatelessWidget {
+  final AnimationController controller;
+//  final Function onComplete;
+//  final Duration duration;
+  final String text;
 
-  CountDownTimer({this.key, this.duration, this.onComplete}) : super(key: key);
+  CountDownTimer({this.controller, this.text});
 
-  @override
-  CountDownTimerState createState() => CountDownTimerState();
-}
+//  String get timerString {
+//    Duration duration = controller.duration * controller.value;
+//    String timeLeft = ((duration.inSeconds).toInt() + 1).toString();
+//    return timeLeft;
+//  }
 
-class CountDownTimerState extends State<CountDownTimer>
-    with TickerProviderStateMixin {
-  AnimationController controller;
-  Function listener;
+//  @override
+//  void initState() {
+//    super.initState();
+//
+//    controller = AnimationController(
+//      vsync: this,
+//      duration: widget.duration,
+//      reverseDuration: widget.duration,
+//    )..addListener(() {
+//        this.setState(() {});
+//      });
+//
+////    print('duration ${widget.duration}');
+//
+//    listener = (status) {
+//      if (status == AnimationStatus.dismissed) {
+//        print('TIMEOUT');
+//        controller.removeStatusListener(listener);
+//        controller.stop();
+//        widget.onComplete();
+//      }
+//    };
+//
+//  }
 
-  String get timerString {
-    Duration duration = controller.duration * controller.value;
-    return '${(duration.inSeconds).toString()}';
-  }
+//  @override
+//  void dispose() {
+//    print('DISPOSE');
+//    controller.removeStatusListener(listener);
+//    controller.dispose();
+//    super.dispose();
+//  }
 
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-      reverseDuration: widget.duration,
-    )..addListener(() {
-        this.setState(() {});
-      });
-
-//    print('duration ${widget.duration}');
-
-    listener = (status) {
-      if (status == AnimationStatus.dismissed) {
-        print('TIMEOUT');
-        controller.removeStatusListener(listener);
-        controller.stop();
-        widget.onComplete();
-      }
-    };
-
-//    start();
-  }
-
-  @override
-  void dispose() {
-    print('DISPOSE');
-    controller.removeStatusListener(listener);
-    controller.dispose();
-    super.dispose();
-  }
-
-  Future<Null> start() async {
-    print('START');
-    controller.addStatusListener(listener);
-    try {
-//      await controller.forward();
-      await controller.reverse(
-          from: controller.value == 0.0 ? 1.0 : controller.value);
-    } on TickerCanceled {}
-  }
-
-  void reset() async {
-    print('RESET');
-    controller.removeStatusListener(listener);
-    controller.reset();
-  }
-
-  void pause() async {
-    print('PAUSE');
-    controller.removeStatusListener(listener);
-    controller.stop();
-  }
-
-  void stop() {
-    print('STOP');
-  }
+//  Future<Null> start() async {
+//    print('START');
+//    controller.addStatusListener(listener);
+//    try {
+////      await controller.forward();
+//      await controller.reverse(
+//          from: controller.value == 0.0 ? 1.0 : controller.value);
+//    } on TickerCanceled {}
+//  }
+//
+//  void reset() async {
+//    print('RESET');
+//    controller.removeStatusListener(listener);
+//    controller.reset();
+//  }
+//
+//  void pause() async {
+//    print('PAUSE');
+//    controller.removeStatusListener(listener);
+//    controller.stop();
+//  }
+//
+//  void stop() {
+//    print('STOP');
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +98,8 @@ class CountDownTimerState extends State<CountDownTimer>
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        timerString,
+//                        text,
+                        text,
                         style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,

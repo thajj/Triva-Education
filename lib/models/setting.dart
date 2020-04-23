@@ -43,8 +43,6 @@ class Setting extends Model {
       _sound = sharedPreferences.getBool('sound') ?? true;
       _vibration = sharedPreferences.getBool('vibration') ?? true;
       _showAnswer = sharedPreferences.getBool('displayCorrectAnswer') ?? true;
-
-      print('OK sound --- ${_sound}');
     });
 
     // Then notify all the listeners.

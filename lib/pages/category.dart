@@ -72,18 +72,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text('Catégories'),
+          title: Text('TOPICS'),
           elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.home),
             onPressed: () => Navigator.pushNamed(context, "/start"),
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () => Navigator.pushNamed(context, "/settings"),
-            ),
-          ],
+//          actions: <Widget>[
+//            IconButton(
+//              icon: Icon(Icons.settings),
+//              onPressed: () => Navigator.pushNamed(context, "/settings"),
+//            ),
+//          ],
         ),
         body: Container(
             width: screenSize.width,
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               size: 40,
               color: Colors.white,
             ),
-          if (category.icon != null) SizedBox(height: 5.0),
+          if (category.icon != null) SizedBox(height: 15.0),
           AutoSizeText(
             category.name,
             minFontSize: 18.0,

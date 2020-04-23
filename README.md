@@ -26,8 +26,19 @@ First Native APP develop during Covid-19....
 - [x] Make current question indicator fixed
 - [x] Block portrait orientation (Especially in mobile device)
 - [x] Notify settings change when there's a change
-- [ ] Bring back color animation (fade out) when refactor is done
-- [ ] i8n for EN
+- [x] Bring back color animation (fade out)
+- [ ] Fix timer and wave animation for the first question
+- [x] i8n for EN
+- [ ] Add licence and use logo from openTDB
+- [ ] Add random mode
+- [ ] Precached audio file
+- [ ] Plum sound effect when tapping some btn
+- [ ] Move setting to start page
+- [x] Fix splash screen
+- [ ] Animate logo after splash screen ann fade in Open Trivia
+- [ ] Update the font of Open Trivia
+- [ ] Centrer Logo in start page
+
 
 
 - [ ] Adapt data model with home Back end - cat + q&A
@@ -69,4 +80,16 @@ First Native APP develop during Covid-19....
 * Implement notification
 * Extract legend
 * Add custom splash page in order to use animated_kit + server connection + warmup
+* display the number of questions https://opentdb.com/api_count_global.php
 
+### Resources
+
+https://github.com/nisrulz/flutter-examples
+Google sign in : https://github.com/nisrulz/flutter-examples/tree/master/google_signin
+
+
+INTL
+https://github.com/flutter/website/blob/master/examples/internationalization/intl_example/lib/main.dart
+// flutter pub get
+// flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/main.dart
+// flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/main.dart lib/l10n/intl_*.arb

@@ -13,6 +13,8 @@ import 'package:quiz/pages/quizz_finished.dart';
 import 'package:quiz/pages/timer/wave_animation.dart';
 import 'package:vibration/vibration.dart';
 
+import '../constants.dart';
+
 class QuizPage extends StatefulWidget {
   final List<Question> questions;
   final Category category;
@@ -26,28 +28,29 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage>
-    with SingleTickerProviderStateMixin {
+class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 //  GlobalKey<CountDownClipperState> _countDownClipperKey = GlobalKey();
 
-  GlobalKey<CountDownTimerState> _countDownTimerKey = GlobalKey();
+//  GlobalKey<CountDownTimerState> _countDownTimerKey = GlobalKey();
+//  GlobalKey<DemoBodyState> _waveAnimationKey = GlobalKey();
 
   final TextStyle _questionStyle = TextStyle(
       fontSize: 20.0, fontWeight: FontWeight.w500, color: Colors.white);
-
-  final String correctSound = 'sounds/correct.mp3';
-  final String incorrectSound = 'sounds/incorrect.mp3';
 
   Timer timer;
   Stopwatch stopwatch = Stopwatch();
   static const delay = Duration(microseconds: 1);
   String timeText = '';
 
+  CountDownTimer _countDownTimer;
+  DemoBody _waveAnimation;
+
   /// for animation
   var begin = 0.0;
   Animation<double> heightSize;
   AnimationController _controller;
+  AnimationController _waveController;
 
   AudioPlayer audioPlayer;
   AudioCache audioCache;
@@ -58,18 +61,23 @@ class _QuizPageState extends State<QuizPage>
 
   final Map<int, dynamic> _answers = {};
 
-  CountDownTimer _countDownTimer;
-
   /// Called each time the time is ticking
   void updateClock() {
+    //TODO : not sure if it's the best
+    if (!_controller.isAnimating) {
+      return;
+    }
+
     final duration = Duration(hours: 0, minutes: 0, seconds: 10);
 
     // if time is up, stop the timer
+//    print('${stopwatch.elapsed.inMilliseconds} == ${duration.inMilliseconds}');
     if (stopwatch.elapsed.inMilliseconds == duration.inMilliseconds) {
       print('--finished Timer Page--');
       stopwatch.stop();
       stopwatch.reset();
       _controller.stop(canceled: false);
+      _timeout();
       return;
     }
 
@@ -85,21 +93,24 @@ class _QuizPageState extends State<QuizPage>
 //      timeText = '${hoursRemaining.toString().padLeft(2, '0')}:'
 //          '${minutesRemaining.toString().padLeft(2, '0')}:'
 //          '${secondsRemaining.toString().padLeft(2, '0')}';
-      timeText = '${secondsRemaining.toString().padLeft(2, '0')}';
+
+      //timeText = '${secondsRemaining.toString().padLeft(2, '0')}';
+      timeText = '${secondsRemaining.toString()}';
     });
 
     if (stopwatch.isRunning) {
       //running
 
     } else if (stopwatch.elapsed.inSeconds == 0) {
+      //FIXME to validate when it occurs
+      print('--------------------------');
+      print(stopwatch.elapsed.inSeconds);
       setState(() {
-//        timeText = '${task.hours.toString().padLeft(2, "0")}:f'
-//            '${task.minutes.toString().padLeft(2, '0')}:'
-//            '${task.seconds.toString().padLeft(2, '0')}';
-        timeText = '10';
+//        timeText = '10';
         stopwatch.stop();
         _controller.stop(canceled: false);
       });
+      //_timeout();
     } else {
       //PAUSED
 
@@ -120,17 +131,29 @@ class _QuizPageState extends State<QuizPage>
       duration: duration,
       vsync: this,
     );
+    _waveController =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
 
     timer = Timer.periodic(delay, (Timer t) => updateClock());
 
-    //
-    _countDownTimer = CountDownTimer(
-      key: _countDownTimerKey,
-      duration: Duration(seconds: 10),
-      onComplete: _timeout,
-    );
-
     _startCountDown();
+
+//    List<Offset> animList1 = [];
+//    _waveController.addListener(() {
+//      animList1.clear();
+//      for (int i = -2 - widget.xOffset;
+//          i <= widget.size.width.toInt() + 2;
+//          i++) {
+//        animList1.add(new Offset(
+//            i.toDouble() + widget.xOffset,
+//            sin((animationController.value * 360 - i) %
+//                        360 *
+//                        Vector.degrees2Radians) *
+//                    10 +
+//                30 +
+//                widget.yOffset));
+//      }
+    _waveController.repeat();
   }
 
   @override
@@ -142,6 +165,7 @@ class _QuizPageState extends State<QuizPage>
   @override
   void dispose() {
     _controller.dispose();
+    _waveController.dispose();
     stopwatch.stop();
     timer.cancel();
     audioPlayer = null;
@@ -149,7 +173,6 @@ class _QuizPageState extends State<QuizPage>
   }
 
   void _startCountDown() {
-    begin = 0.0;
     stopwatch.start();
     stopwatch.reset();
     _controller.reset();
@@ -159,10 +182,16 @@ class _QuizPageState extends State<QuizPage>
 //    _countDownClipperKey.currentState.start();
 
     //FIXME: currentState is null
-    if (_countDownTimerKey.currentState != null) {
-      _countDownTimerKey.currentState.reset();
-      _countDownTimerKey.currentState.start();
-    }
+//    if (_countDownTimerKey.currentState != null) {
+//      _countDownTimerKey.currentState.reset();
+//      _countDownTimerKey.currentState.start();
+//    }
+
+//    print('START COUNTDOWN');
+//    if (_waveAnimationKey.currentState != null) {
+//      _waveAnimationKey.currentState.reset();
+//      _waveAnimationKey.currentState.start();
+//    }
   }
 
   void _restartCountDown() {
@@ -174,14 +203,17 @@ class _QuizPageState extends State<QuizPage>
 
   void _pauseTimers() {
 //    _countDownClipperKey.currentState.stop();
-    _countDownTimerKey.currentState.pause();
+//    _countDownTimerKey.currentState.pause();
+//    _waveAnimationKey.currentState.pause();
+
     _controller.stop(canceled: false);
     stopwatch.stop();
   }
 
   void _resumeTimer() {
 //    _countDownClipperKey.currentState.start();
-    _countDownTimerKey.currentState.start();
+//    _countDownTimerKey.currentState.start();
+//    _waveAnimationKey.currentState.start();
 
     begin = 50.0;
     stopwatch.start();
@@ -313,11 +345,11 @@ class _QuizPageState extends State<QuizPage>
   }
 
   Future _playCorrect() async {
-    await AudioCache().play(correctSound);
+    await AudioCache().play(Constants().correctSound);
   }
 
   Future _playIncorrect() async {
-    await AudioCache().play(incorrectSound);
+    await AudioCache().play(Constants().incorrectSound);
   }
 
   Future<bool> _onWillPop() async {
@@ -366,7 +398,7 @@ class _QuizPageState extends State<QuizPage>
                             ),
                             color: Colors.white,
                             child: Text(
-                              "Continuer",
+                              "Resume",
                               style: TextStyle(fontSize: 20),
                             ),
                             onPressed: () {
@@ -390,7 +422,7 @@ class _QuizPageState extends State<QuizPage>
                             ),
                             color: Colors.white,
                             child: Text(
-                              "Quitter",
+                              "Exit",
                               style: TextStyle(fontSize: 20),
                             ),
                             onPressed: () => Navigator.pop(context, true),
@@ -428,6 +460,23 @@ class _QuizPageState extends State<QuizPage>
 
     Size size = Size(MediaQuery.of(context).size.width, heightSize.value);
 
+    //FIXME: temp patch because the color controller still exist
+    _waveAnimation = DemoBody(
+      controller: _controller,
+      waveController: _waveController,
+      size: size,
+    );
+
+    _countDownTimer = CountDownTimer(
+//      key: GlobalKey<CountDownTimerState>(),
+      text: timeText,
+//      duration: Duration(seconds: 9),
+      controller: _controller,
+//      onComplete: () {
+//        print('OKOKOK');
+//      },
+    );
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -440,8 +489,9 @@ class _QuizPageState extends State<QuizPage>
           elevation: 4,
           actions: <Widget>[
             Container(
-                padding: EdgeInsets.only(top: 8, right: 16, bottom: 8, left: 4),
-                child: _countDownTimer),
+              padding: EdgeInsets.only(top: 8, right: 16, bottom: 8, left: 4),
+              child: _countDownTimer,
+            ),
           ],
         ),
         body: LayoutBuilder(
@@ -451,7 +501,7 @@ class _QuizPageState extends State<QuizPage>
               AnimatedBuilder(
                 animation: _controller,
                 builder: (context, child) {
-                  return DemoBody(size: size, color: Colors.pink);
+                  return _waveAnimation;
                 },
               ),
 //              DemoBody(size: size, color: Colors.pink),
@@ -496,74 +546,61 @@ class _QuizPageState extends State<QuizPage>
                           ),
                         ],
                       ),
-                      _currentIndex % 2 == 0
-                          ? Container()
-                          : Container(
-                              height: constraints.maxHeight / 3 + 10,
-                              padding: EdgeInsets.only(top: 20),
-                              child: Image.network(
-                                "https://duckduckgo.com/i/3a758bd3.jpg",
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
+//                      _currentIndex % 2 == 0
+//                          ? Container()
+//                          : Container(
+//                              height: constraints.maxHeight / 3 + 10,
+//                              padding: EdgeInsets.only(top: 20),
+//                              child: Image.network(
+//                                "https://duckduckgo.com/i/3a758bd3.jpg",
+//                                fit: BoxFit.fitHeight,
+//                              ),
+//                            ),
                     ],
                   ),
                 ),
               ),
-//              _currentIndex % 2 == 0
-//                  ? Container()
-//                  : Positioned(
-//                      width: constraints.maxWidth,
-//                      height: constraints.maxHeight / 2 * 2 / 3,
-//                      top: constraints.maxHeight / 6,
-//                      child: Container(
-//                        padding: EdgeInsets.all(12),
-////                        color: Colors.lightBlue,
-//                        child: Image.network(
-//                          "https://duckduckgo.com/i/3a758bd3.jpg",
-//                          fit: BoxFit.fitHeight,
-//                        ),
-//                      ),
-//                    ),
               Positioned(
                 width: constraints.maxWidth,
                 height: constraints.maxHeight / 2,
                 top: constraints.maxHeight / 2,
                 child: Container(
+                    padding: EdgeInsets.only(bottom: 10),
 //                    color: Colors.black,
                     child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        ...options.map((option) => SizedBox(
-                              width: double.infinity,
-                              height: 78.0,
-                              child: Padding(
-                                padding: EdgeInsets.only(bottom: 12),
-                                child: RaisedButton(
-                                  color: widget.setting.showAnswer
-                                      ? btnColorState(option)
-                                      : Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ...options.map((option) => SizedBox(
+                                  width: double.infinity,
+                                  height: 78.0,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
+                                    child: RaisedButton(
+                                      color: widget.setting.showAnswer
+                                          ? btnColorState(option)
+                                          : Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Text(
+                                        HtmlUnescape().convert("$option"),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      onPressed: () => _isButtonTapped
+                                          ? null
+                                          : _handleAnswerClick(option),
+                                    ),
                                   ),
-                                  child: Text(
-                                    HtmlUnescape().convert("$option"),
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  onPressed: () => _isButtonTapped
-                                      ? null
-                                      : _handleAnswerClick(option),
-                                ),
-                              ),
-                            )),
-                      ],
-                    ),
-                  ),
-                )),
+                                )),
+                          ],
+                        ),
+                      ),
+                    )),
               ),
             ],
           ),
