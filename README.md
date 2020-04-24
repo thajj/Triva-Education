@@ -36,7 +36,7 @@ First Native APP develop during Covid-19....
 - [ ] Move setting to start page
 - [x] Fix splash screen
 - [ ] Animate logo after splash screen fade in App name + Logo
-- [ ] Update the font of Open Trivia
+- [x] Update the font of Open Trivia
 - [ ] Fix broken wave animation
 
 

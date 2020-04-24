@@ -33,6 +33,7 @@ dependencies:
   shared_preferences: any
   vibration: ^1.2.4
   audioplayers: ^0.15.1
+  flutter_staggered_animations: ^0.1.2
 #  intl: 0.16.1
 #  intl_translation: ^0.17.10
   intl:
@@ -93,6 +94,9 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
+    - family: AvocadoCreamy
+      fonts:
+        - asset: assets/fonts/Avocado-Creamy.otf
     - family: SF Pro Display
       fonts:
         - asset: assets/fonts/SF-Pro-Display-Ultralight.otf

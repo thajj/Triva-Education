@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:quiz/components/quiz_options.dart';
 import 'package:quiz/models/category.dart';
 
@@ -71,13 +72,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       },
       child: Scaffold(
         key: _scaffoldKey,
+        backgroundColor: Colors.grey.shade300,
         appBar: AppBar(
-          title: Text('TOPICS'),
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () => Navigator.pushNamed(context, "/start"),
+          centerTitle: true,
+          title: Text(
+            'Categories',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 40,
+              fontFamily: 'AvocadoCreamy',
+            ),
           ),
+          elevation: 0,
+//          leading: IconButton(
+//            icon: Icon(Icons.home),
+//            onPressed: () => Navigator.pushNamed(context, "/start"),
+//          ),
 //          actions: <Widget>[
 //            IconButton(
 //              icon: Icon(Icons.settings),
@@ -89,6 +99,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: screenSize.width,
             height: screenSize.height,
             child: Stack(
+              alignment: Alignment.topCenter,
               children: <Widget>[
                 ClipPath(
                   clipper: WaveClipperTwo(),
@@ -98,44 +109,89 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     height: 200,
                   ),
                 ),
-                CustomScrollView(
-                  physics: BouncingScrollPhysics(),
-                  slivers: <Widget>[
-//                SliverToBoxAdapter(
-//                  child: Padding(
-//                    padding: const EdgeInsets.symmetric(
-//                        horizontal: 16.0, vertical: 30.0),
-//                    child: Text(
-//                      "Sélectionne une catégorie",
-//                      style: TextStyle(
-//                          color: Colors.white,
-//                          fontWeight: FontWeight.w500,
-//                          fontSize: 20.0),
-//                      textAlign: TextAlign.center,
-//                    ),
-//                  ),
-//                ),
-                    SliverPadding(
-                      padding: const EdgeInsets.only(
-                          top: 56.0, right: 16.0, bottom: 16.0, left: 16.0),
-                      sliver: SliverGrid(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.2,
-                                  crossAxisSpacing: 10.0,
-                                  mainAxisSpacing: 10.0),
-                          delegate: SliverChildBuilderDelegate(
-                            _buildCategoryItem,
-                            childCount: categories.length,
-                          )),
+                Container(
+                  padding: EdgeInsets.only(top: 20.0),
+                  child: AnimationLimiter(
+                    child: GridView.count(
+                      childAspectRatio: 1,
+                      padding: EdgeInsets.all(4.0),
+                      crossAxisCount: 3,
+                      children: List.generate(
+                        categories.length,
+                        (int index) {
+                          return AnimationConfiguration.staggeredGrid(
+                            columnCount: 3,
+                            position: index,
+                            duration: Duration(milliseconds: 575),
+                            child: ScaleAnimation(
+                              scale: 0.5,
+                              child: FadeInAnimation(
+                                  child: _buildCategoryItem(context, index)
+//                              child: Container(
+//                                width: 100,
+//                                height: 100,
+//                                margin: EdgeInsets.symmetric(
+//                                    vertical: 8.0, horizontal: 8.0),
+//                                decoration: BoxDecoration(
+//                                  color: Colors.white,
+//                                  borderRadius:
+//                                      BorderRadius.all(Radius.circular(4.0)),
+//                                  boxShadow: <BoxShadow>[
+//                                    BoxShadow(
+//                                      color: Colors.black12,
+//                                      blurRadius: 4.0,
+//                                      offset: Offset(0.0, 4.0),
+//                                    ),
+//                                  ],
+//                                ),
+//                              ),
+                                  ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-                FadeBox(
-                  fadeScreenAnimation: fadeScreenAnimation,
-                  containerGrowAnimation: containerGrowAnimation,
-                ),
+
+//                CustomScrollView(
+//                  physics: BouncingScrollPhysics(),
+//                  slivers: <Widget>[
+////                SliverToBoxAdapter(
+////                  child: Padding(
+////                    padding: const EdgeInsets.symmetric(
+////                        horizontal: 16.0, vertical: 30.0),
+////                    child: Text(
+////                      "Sélectionne une catégorie",
+////                      style: TextStyle(
+////                          color: Colors.white,
+////                          fontWeight: FontWeight.w500,
+////                          fontSize: 20.0),
+////                      textAlign: TextAlign.center,
+////                    ),
+////                  ),
+////                ),
+//                    SliverPadding(
+//                      padding: const EdgeInsets.only(
+//                          top: 56.0, right: 16.0, bottom: 16.0, left: 16.0),
+//                      sliver: SliverGrid(
+//                          gridDelegate:
+//                              SliverGridDelegateWithFixedCrossAxisCount(
+//                                  crossAxisCount: 2,
+//                                  childAspectRatio: 1.2,
+//                                  crossAxisSpacing: 10.0,
+//                                  mainAxisSpacing: 10.0),
+//                          delegate: SliverChildBuilderDelegate(
+//                            _buildCategoryItem,
+//                            childCount: categories.length,
+//                          )),
+//                    ),
+//                  ],
+//                ),
+//                FadeBox(
+//                  fadeScreenAnimation: fadeScreenAnimation,
+//                  containerGrowAnimation: containerGrowAnimation,
+//                ),
               ],
             )),
       ),
@@ -144,6 +200,48 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildCategoryItem(BuildContext context, int index) {
     Category category = categories[index];
+
+    return GestureDetector(
+      child: Container(
+//          width: 100,
+//          height: 100,
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(2),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4.0,
+              offset: Offset(0.0, 4.0),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            if (category.icon != null)
+              Icon(
+                category.icon,
+                size: 32,
+                color: Colors.black,
+              ),
+            if (category.icon != null) SizedBox(height: 10.0),
+            AutoSizeText(
+              category.name,
+              minFontSize: 16.0,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              wrapWords: false,
+              style: TextStyle(color: Colors.black),
+            ),
+          ],
+        ),
+      ),
+      onTap: () => _categoryPressed(context, category),
+    );
+
     return MaterialButton(
       elevation: 1.0,
       highlightElevation: 1.0,
