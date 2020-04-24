@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -11,6 +12,7 @@ import 'package:quiz/models/question.dart';
 import 'package:quiz/models/setting.dart';
 import 'package:quiz/pages/quizz_finished.dart';
 import 'package:quiz/pages/timer/wave_animation.dart';
+import 'package:vector_math/vector_math.dart' as Vector;
 import 'package:vibration/vibration.dart';
 
 import '../constants.dart';
@@ -48,6 +50,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 
   CountDownTimer _countDownTimer;
   DemoBody _waveAnimation;
+  List<Offset> _animList = [];
 
   /// for animation
   var begin = 0.0;
@@ -139,23 +142,24 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 
     timer = Timer.periodic(delay, (Timer t) => updateClock());
 
-    _startCountDown();
+    List<Offset> animList = [];
+    _waveController.addListener(() {
+      animList.clear();
+      for (int i = -2; i <= _waveAnimation.size.width.toInt() + 2; i++) {
+        animList.add(new Offset(
+            i.toDouble(),
+            sin((_waveController.value * 360 - i) %
+                        360 *
+                        Vector.degrees2Radians) *
+                    10 +
+                30));
+      }
+      setState(() {
+        _animList = animList;
+      });
+    });
 
-//    List<Offset> animList1 = [];
-//    _waveController.addListener(() {
-//      animList1.clear();
-//      for (int i = -2 - widget.xOffset;
-//          i <= widget.size.width.toInt() + 2;
-//          i++) {
-//        animList1.add(new Offset(
-//            i.toDouble() + widget.xOffset,
-//            sin((animationController.value * 360 - i) %
-//                        360 *
-//                        Vector.degrees2Radians) *
-//                    10 +
-//                30 +
-//                widget.yOffset));
-//      }
+    _startCountDown();
     _waveController.repeat();
   }
 
@@ -237,9 +241,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     }
 
     Timer(Duration(milliseconds: 1500), () {
-      _nextQuestion();
       setState(() {
         _isTimeout = false;
+        _nextQuestion();
       });
     });
   }
@@ -467,6 +471,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     _waveAnimation = DemoBody(
       controller: _controller,
       waveController: _waveController,
+      animList: _animList,
       size: size,
     );
 

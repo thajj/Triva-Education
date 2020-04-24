@@ -15,6 +15,7 @@ class DemoBody extends StatelessWidget {
     @required this.controller,
     @required this.waveController,
     @required this.size,
+    @required this.animList,
 //      this.xOffset = 0,
 //      this.yOffset = 0,
   }) : animationColor = ColorTween(
@@ -22,9 +23,10 @@ class DemoBody extends StatelessWidget {
           end: Colors.grey.shade800,
         ).animate(CurvedAnimation(
             parent: controller,
-            curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn)));
+            curve: Interval(0.6, 1.0, curve: Curves.fastOutSlowIn)));
 
   Animation<Color> animationColor;
+  List<Offset> animList;
 
 //
 //  @override
@@ -100,7 +102,7 @@ class DemoBody extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-//          clipper: new WaveClipper(animationColorController.value, animList1),
+          clipper: new WaveClipper(controller.value, animList),
         ),
       ),
     );
