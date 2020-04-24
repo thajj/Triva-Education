@@ -16,8 +16,8 @@ class StartDetailsPageEnterAnimation {
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.300,
-              0.500,
+              0.250,
+              0.450,
               curve: Curves.elasticOut,
             ),
           ),
@@ -26,8 +26,38 @@ class StartDetailsPageEnterAnimation {
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.500,
+              0.450,
+              0.850,
+              curve: Curves.easeIn,
+            ),
+          ),
+        ),
+        btn1Opactity = new Tween(begin: 0.0, end: 1.0).animate(
+          new CurvedAnimation(
+            parent: controller,
+            curve: new Interval(
+              0.850,
               0.900,
+              curve: Curves.easeIn,
+            ),
+          ),
+        ),
+        btn2Opactity = new Tween(begin: 0.0, end: 1.0).animate(
+          new CurvedAnimation(
+            parent: controller,
+            curve: new Interval(
+              0.900,
+              0.950,
+              curve: Curves.easeIn,
+            ),
+          ),
+        ),
+        btn3Opactity = new Tween(begin: 0.0, end: 1.0).animate(
+          new CurvedAnimation(
+            parent: controller,
+            curve: new Interval(
+              0.950,
+              1.0,
               curve: Curves.easeIn,
             ),
           ),
@@ -107,6 +137,9 @@ class StartDetailsPageEnterAnimation {
 
   final AnimationController controller;
   final Animation<double> btnLogginOpacity;
+  final Animation<double> btn1Opactity;
+  final Animation<double> btn2Opactity;
+  final Animation<double> btn3Opactity;
   final Animation<double> backdropBlur;
   final Animation<double> appNameSize;
   final Animation<double> nameOpacity;

@@ -36,7 +36,10 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 //  GlobalKey<DemoBodyState> _waveAnimationKey = GlobalKey();
 
   final TextStyle _questionStyle = TextStyle(
-      fontSize: 20.0, fontWeight: FontWeight.w500, color: Colors.white);
+    fontSize: 25.0,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
 
   Timer timer;
   Stopwatch stopwatch = Stopwatch();
@@ -482,7 +485,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       child: Scaffold(
         backgroundColor: Colors.grey.shade800,
         appBar: AppBar(
-          title: Text(widget.category.name,
+          centerTitle: true,
+//          title: Text(widget.category.name,
+//              style: TextStyle(
+//                fontSize: 20.0,
+//              )),
+          title: Text('${_currentIndex + 1} / ${widget.questions.length}',
               style: TextStyle(
                 fontSize: 20.0,
               )),
@@ -513,59 +521,27 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 //              ),
               Positioned(
                 width: constraints.maxWidth,
-                height: _currentIndex % 2 == 0
-                    ? constraints.maxHeight / 2 //3
-                    : constraints.maxHeight / 2,
+                height: constraints.maxHeight / 3,
                 top: 0,
                 child: Container(
 //                  color: Colors.red,
                   padding:
                       EdgeInsets.only(top: 20, bottom: 0, left: 12, right: 12),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundColor: Colors.pink,
-                            child: Text(
-                              "${_currentIndex + 1}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(width: 16.0),
-                          Expanded(
-                            child: Text(
-                              HtmlUnescape().convert(
-                                  widget.questions[_currentIndex].question),
-                              softWrap: true,
-                              style: _questionStyle,
-                            ),
-                          ),
-                        ],
-                      ),
-//                      _currentIndex % 2 == 0
-//                          ? Container()
-//                          : Container(
-//                              height: constraints.maxHeight / 3 + 10,
-//                              padding: EdgeInsets.only(top: 20),
-//                              child: Image.network(
-//                                "https://duckduckgo.com/i/3a758bd3.jpg",
-//                                fit: BoxFit.fitHeight,
-//                              ),
-//                            ),
-                    ],
+                  child: Text(
+                    HtmlUnescape()
+                        .convert(widget.questions[_currentIndex].question),
+                    softWrap: true,
+                    style: _questionStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
               Positioned(
                 width: constraints.maxWidth,
-                height: constraints.maxHeight / 2,
-                top: constraints.maxHeight / 2,
+                height: constraints.maxHeight / 3 * 2,
+                top: constraints.maxHeight / 3,
                 child: Container(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: EdgeInsets.only(bottom: 12),
 //                    color: Colors.black,
                     child: Align(
                       alignment: Alignment.bottomCenter,

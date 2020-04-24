@@ -58,6 +58,56 @@ class StartDetailsPage extends StatelessWidget {
 //            ),
             _buildAppName(),
 
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                padding: EdgeInsets.all(30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Opacity(
+                      opacity: animation.btn2Opactity.value,
+                      child: IconButton(
+                        icon: Icon(Icons.settings, color: Colors.black),
+                        iconSize: 32.0,
+                        onPressed: () =>
+                            Navigator.pushNamed(context, "/settings"),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Opacity(
+                      opacity: animation.btn1Opactity.value,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.info_outline,
+                          color: Colors.black,
+                        ),
+                        iconSize: 32.0,
+                        onPressed: () =>
+                            Navigator.pushNamed(context, "/settings"),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Opacity(
+                      opacity: animation.btn3Opactity.value,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.star,
+                          color: Colors.orange,
+                        ),
+                        iconSize: 32.0,
+                        onPressed: () =>
+                            Navigator.pushNamed(context, "/settings"),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Opacity(
               opacity: animation.btnLogginOpacity.value,
               child: StaggerAnimation(

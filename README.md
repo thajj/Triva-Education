@@ -33,11 +33,13 @@ First Native APP develop during Covid-19....
 - [ ] Add random mode + free to play (no timer)
 - [x] Plum sound effect when tapping some btn
 - [ ] Precached audio file
-- [ ] Move setting to start page
+- [x] Move setting to start page
 - [x] Fix splash screen
 - [ ] Animate logo after splash screen fade in App name + Logo
 - [x] Update the font of Open Trivia
 - [ ] Fix broken wave animation
+- [ ] Update credit
+
 
 
 

@@ -88,7 +88,7 @@ class DemoBody extends StatelessWidget {
       child: new AnimatedBuilder(
         animation: new CurvedAnimation(
           parent: controller,
-          curve: Curves.easeInOut,
+          curve: Curves.linear,
         ),
         builder: (context, child) => new ClipPath(
           child: new Container(

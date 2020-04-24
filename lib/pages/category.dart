@@ -153,45 +153,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-
-//                CustomScrollView(
-//                  physics: BouncingScrollPhysics(),
-//                  slivers: <Widget>[
-////                SliverToBoxAdapter(
-////                  child: Padding(
-////                    padding: const EdgeInsets.symmetric(
-////                        horizontal: 16.0, vertical: 30.0),
-////                    child: Text(
-////                      "Sélectionne une catégorie",
-////                      style: TextStyle(
-////                          color: Colors.white,
-////                          fontWeight: FontWeight.w500,
-////                          fontSize: 20.0),
-////                      textAlign: TextAlign.center,
-////                    ),
-////                  ),
-////                ),
-//                    SliverPadding(
-//                      padding: const EdgeInsets.only(
-//                          top: 56.0, right: 16.0, bottom: 16.0, left: 16.0),
-//                      sliver: SliverGrid(
-//                          gridDelegate:
-//                              SliverGridDelegateWithFixedCrossAxisCount(
-//                                  crossAxisCount: 2,
-//                                  childAspectRatio: 1.2,
-//                                  crossAxisSpacing: 10.0,
-//                                  mainAxisSpacing: 10.0),
-//                          delegate: SliverChildBuilderDelegate(
-//                            _buildCategoryItem,
-//                            childCount: categories.length,
-//                          )),
-//                    ),
-//                  ],
-//                ),
-//                FadeBox(
-//                  fadeScreenAnimation: fadeScreenAnimation,
-//                  containerGrowAnimation: containerGrowAnimation,
-//                ),
               ],
             )),
       ),
@@ -203,8 +164,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     return GestureDetector(
       child: Container(
-//          width: 100,
-//          height: 100,
         margin: EdgeInsets.all(8.0),
         padding: EdgeInsets.all(2),
         decoration: BoxDecoration(
