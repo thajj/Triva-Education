@@ -62,7 +62,8 @@ class QuizFinishedPage extends StatelessWidget {
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
                     title: Text("Score", style: titleStyle),
-                    trailing: Text("${correct / questions.length * 100}%",
+                    trailing: Text(
+                        "${(correct / questions.length * 100).toInt()}%",
                         style: trailingStyle),
                   ),
                 ),
@@ -104,7 +105,7 @@ class QuizFinishedPage extends StatelessWidget {
                       ),
                       color: Colors.white,
                       child: Text(
-                        "Retour",
+                        "Back",
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,
