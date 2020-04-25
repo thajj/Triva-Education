@@ -83,6 +83,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       stopwatch.stop();
       stopwatch.reset();
       _controller.stop(canceled: false);
+      setState(() {
+        timeText = '0';
+      });
       _timeout();
       return;
     }
@@ -101,7 +104,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 //          '${secondsRemaining.toString().padLeft(2, '0')}';
 
       //timeText = '${secondsRemaining.toString().padLeft(2, '0')}';
-      timeText = '${secondsRemaining.toString()}';
+      timeText = '${(secondsRemaining + 1).toString()}';
     });
 
     if (stopwatch.isRunning) {
