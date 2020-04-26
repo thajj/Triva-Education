@@ -16,8 +16,6 @@ First Native APP develop during Covid-19....
 - [x] Splash screen - [Tutorial here](https://medium.com/@diegoveloper/flutter-splash-screen-9f4e05542548)
 - [x] Sound effect
 - [x] Fix timer
-- [ ] Add share
-- [ ] Add rate App
 - [x] Make app fullscreen and adjust widget position in quizz page
 - [x] Make reponsvive
 - [x] Improve UX of the category
@@ -30,40 +28,42 @@ First Native APP develop during Covid-19....
 - [X] Fix timers for the first question
 - [x] i8n for EN
 - [ ] Add licence and use logo from openTDB
-- [ ] Add random mode + free to play (no timer)
 - [x] Plum sound effect when tapping some btn
 - [ ] Precached audio file
 - [x] Move setting to start page
 - [x] Fix splash screen
 - [ ] Animate logo after splash screen fade in App name + Logo
 - [x] Update the font of Open Trivia
-- [ ] Fix broken wave animation
+- [x] Fix broken wave animation
 - [ ] Update credit
-
-
-
-
-- [ ] Adapt data model with home Back end - cat + q&A
-- [ ] Add theme support
+- [ ] Finish start
+    - [ ] Play to close
+    - [ ] Add share
+    - [ ] Add rate App : https://pub.dev/packages/rating_dialog#-readme-tab-
+- [x] Decide a name of the APP
+- [x] Icon page - [Tutorial here](https://stackoverflow.com/questions/43928702/how-to-change-the-application-launcher-icon-on-flutter) and [here](https://androidmonks.com/flutter-change-app-name/#Changing_App_Icon_For_IOS)
 - [ ] Test APK mobile no network
-- [ ] Hide home btn in APP bar when before release
-- [ ] branch before using the right BO
-
-### with vk
-- [ ] Decide a name of the APP
-- [ ] Icon page - [Tutorial here](https://stackoverflow.com/questions/43928702/how-to-change-the-application-launcher-icon-on-flutter) and [here](https://androidmonks.com/flutter-change-app-name/#Changing_App_Icon_For_IOS)
-
+- [x] Hide home btn in APP bar when before release
+- [x] branch before using the right BO
+- [x] Open settings as dialog : - Open settings as dialog :
+- [ ] Background detection - pause
+- [ ] Setting UI
+- [ ] 60sec remaining...
+- [ ] Animated BG
+- [ ] Button UI 
+- [ ] Result animation : https://medium.com/@felixblaschke/fade-in-your-uis-in-flutter-c81b1c345f70
+- [ ] Answer animation?
 
 ## Preparing the APP for release
 
 
-- [ ] Onboarding screen
-- [ ] Title + description
+- [x] Onboarding screen
+- [x] Title + description
 
 ### [ANDROID](https://flutter.dev/docs/deployment/android)
 
-- [ ] Bundle package + review ID / package / label
-- [ ] Deploy for private access
+- [x] Bundle package + review ID / package / label
+- [x] Deploy for private access
 
 ### [IOS](https://flutter.dev/docs/deployment/ios)
 
@@ -73,8 +73,13 @@ First Native APP develop during Covid-19....
 - [ ] Validate account for publication...
 
 
+## Warning to fix
+* No preferred FlutterEngine was provided. Creating a new FlutterEngine for this FlutterFragment
+
 ## TODO - NICE TO HAVE / ROAD MAP ##
 
+* Adapt data model with home Back end - cat + q&A
+* Add theme support
 * Add game mode (free to play, random, no timer
 * Improve the UX of the settings screen
 * Impleement order control of question
@@ -87,7 +92,11 @@ First Native APP develop during Covid-19....
 ### Resources
 
 https://github.com/nisrulz/flutter-examples
+
 Google sign in : https://github.com/nisrulz/flutter-examples/tree/master/google_signin
+https://developers.google.com/android/guides/client-auth
+https://stackoverflow.com/questions/54557479/flutter-and-google-sign-in-plugin-platformexceptionsign-in-failed-com-google/54696963#54696963
+
 Facebook : https://github.com/roughike/flutter_facebook_login
 
 INTL
