@@ -27,17 +27,28 @@ dependencies:
   connectivity: ^0.4.3+2
   flutter_custom_clippers: ^0.1.6
   html_unescape: ^1.0.1+2
-  font_awesome_flutter: ^8.4.0
+#  font_awesome_flutter: ^8.4.0
+  line_awesome_icons: ^1.0.4+2
+#  line_awesome_icons:
+#    git:
+#      url: git://github.com/mateotomasgomez/line_awesome_icons_flutter
+#      ref: master
   auto_size_text: ^2.0.0+2
   cached_network_image: ^2.0.0
   shared_preferences: any
   vibration: ^1.2.4
   audioplayers: ^0.15.1
   flutter_staggered_animations: ^0.1.2
-#  intl: 0.16.1
+  rate_my_app: ^0.6.0+2
+#  flutter_signin_button: ^1.0.0
+  #test google sign in
+  google_sign_in:
+  firebase_auth:
+  #  intl: 0.16.1
 #  intl_translation: ^0.17.10
   intl:
   intl_translation:
+
 
     #url_launcher: ^5.4.2
   #flutter_facebook_login: ^3.0.0

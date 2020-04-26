@@ -8,7 +8,7 @@ class StartDetailsPageEnterAnimation {
             curve: new Interval(
               0.000,
               0.250,
-              curve: Curves.easeIn,
+              curve: Curves.elasticInOut,
             ),
           ),
         ),
@@ -16,137 +16,69 @@ class StartDetailsPageEnterAnimation {
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.250,
-              0.450,
+              0.300,
+              0.400,
               curve: Curves.elasticOut,
             ),
           ),
         ),
-        btnLogginOpacity = new Tween(begin: 0.0, end: 1.0).animate(
+        appNameSize2 = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.450,
-              0.850,
-              curve: Curves.easeIn,
-            ),
-          ),
-        ),
-        btn1Opactity = new Tween(begin: 0.0, end: 1.0).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
-              0.850,
-              0.900,
-              curve: Curves.easeIn,
-            ),
-          ),
-        ),
-        btn2Opactity = new Tween(begin: 0.0, end: 1.0).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
-              0.900,
-              0.950,
-              curve: Curves.easeIn,
-            ),
-          ),
-        ),
-        btn3Opactity = new Tween(begin: 0.0, end: 1.0).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
-              0.950,
-              1.0,
-              curve: Curves.easeIn,
-            ),
-          ),
-        ),
-
-        ///
-        backdropBlur = new Tween(begin: 0.0, end: 5.0).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
-              0.000,
-              0.800,
-              curve: Curves.ease,
-            ),
-          ),
-        ),
-        nameOpacity = new Tween(begin: 0.0, end: 1.0).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
-              0.350,
-              0.450,
-              curve: Curves.easeIn,
-            ),
-          ),
-        ),
-        locationOpacity = new Tween(begin: 0.0, end: 0.85).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
+              0.300,
               0.500,
+              curve: Curves.elasticOut,
+            ),
+          ),
+        ),
+        btnPlaySize = new Tween(begin: 0.0, end: 1.0).animate(
+          new CurvedAnimation(
+            parent: controller,
+            curve: new Interval(
               0.600,
-              curve: Curves.easeIn,
+              0.750,
+              curve: Curves.elasticOut,
             ),
           ),
         ),
-        dividerWidth = new Tween(begin: 0.0, end: 225.0).animate(
+        btnSettingSize = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.650,
-              0.750,
-              curve: Curves.fastOutSlowIn,
-            ),
-          ),
-        ),
-        biographyOpacity = new Tween(begin: 0.0, end: 0.85).animate(
-          new CurvedAnimation(
-            parent: controller,
-            curve: new Interval(
-              0.750,
+              0.800,
               0.900,
-              curve: Curves.easeIn,
+              curve: Curves.elasticOut,
             ),
           ),
         ),
-        videoScrollerXTranslation = new Tween(begin: 60.0, end: 0.0).animate(
+        btnStatSize = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.830,
-              1.000,
-              curve: Curves.ease,
+              0.850,
+              0.950,
+              curve: Curves.elasticOut,
             ),
           ),
         ),
-        videoScrollerOpacity = new Tween(begin: 0.0, end: 1.0).animate(
+        btnTrophySize = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.830,
-              1.000,
-              curve: Curves.fastOutSlowIn,
+              0.900,
+              1.0,
+              curve: Curves.elasticOut,
             ),
           ),
         );
 
   final AnimationController controller;
-  final Animation<double> btnLogginOpacity;
-  final Animation<double> btn1Opactity;
-  final Animation<double> btn2Opactity;
-  final Animation<double> btn3Opactity;
-  final Animation<double> backdropBlur;
+  final Animation<double> btnPlaySize;
   final Animation<double> appNameSize;
-  final Animation<double> nameOpacity;
-  final Animation<double> locationOpacity;
-  final Animation<double> dividerWidth;
-  final Animation<double> biographyOpacity;
-  final Animation<double> videoScrollerXTranslation;
+  final Animation<double> appNameSize2;
+  final Animation<double> btnSettingSize;
+  final Animation<double> btnStatSize;
+  final Animation<double> btnTrophySize;
   final Animation<double> logoYTranslation;
-  final Animation<double> videoScrollerOpacity;
 }

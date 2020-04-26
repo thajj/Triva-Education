@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:quiz/pages/start/start_page_enter_animation.dart';
 
 class StartDetailsPage extends StatelessWidget {
@@ -56,63 +58,167 @@ class StartDetailsPage extends StatelessWidget {
 //                fit: BoxFit.fitHeight,
 //              ),
 //            ),
-            _buildAppName(),
+
+            Container(
+              margin: EdgeInsets.only(bottom: 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _animateWidget(
+                      Text(
+                        'Open ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 50,
+                          fontFamily: 'AvocadoCreamy',
+                        ),
+                      ),
+                      animation.appNameSize.value),
+                  _animateWidget(
+                      Text(
+                        'Trivia',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 70,
+                          fontFamily: 'AvocadoCreamy',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      animation.appNameSize2.value),
+                ],
+              ),
+            ),
 
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                padding: EdgeInsets.all(30),
+                padding: EdgeInsets.only(bottom: 50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Opacity(
-                      opacity: animation.btn2Opactity.value,
-                      child: IconButton(
-                        icon: Icon(Icons.settings, color: Colors.black),
-                        iconSize: 32.0,
-                        onPressed: () =>
-                            Navigator.pushNamed(context, "/settings"),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Opacity(
-                      opacity: animation.btn1Opactity.value,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.info_outline,
-                          color: Colors.black,
+                    _animateWidget(
+                        IconButton(
+                          icon: Icon(LineAwesomeIcons.cog, color: Colors.pink),
+                          splashColor: Colors.pink,
+                          iconSize: 32.0,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/settings"),
                         ),
-                        iconSize: 32.0,
-                        onPressed: () =>
-                            Navigator.pushNamed(context, "/settings"),
-                      ),
-                    ),
+                        animation.btnSettingSize.value),
                     SizedBox(
-                      width: 30,
+                      width: 20,
                     ),
-                    Opacity(
-                      opacity: animation.btn3Opactity.value,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.star,
-                          color: Colors.orange,
+                    _animateWidget(
+                        IconButton(
+                          icon: Icon(LineAwesomeIcons.bar_chart,
+                              color: Colors.blue),
+                          splashColor: Colors.pink,
+                          iconSize: 32.0,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/test"),
                         ),
-                        iconSize: 32.0,
-                        onPressed: () =>
-                            Navigator.pushNamed(context, "/settings"),
-                      ),
+                        animation.btnStatSize.value),
+                    SizedBox(
+                      width: 20,
                     ),
+                    _animateWidget(
+                        IconButton(
+                          icon: Icon(LineAwesomeIcons.trophy,
+                              color: Colors.black),
+                          splashColor: Colors.pink,
+                          iconSize: 30.0,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/test2"),
+                        ),
+                        animation.btnTrophySize.value),
+
+//                    Opacity(
+//                      opacity: animation.btn1Opactity.value,
+//                      child: IconButton(
+//                        icon: Icon(
+//                          Icons.info_outline,
+//                          color: Colors.black,
+//                        ),
+//                        iconSize: 32.0,
+//                        onPressed: () => Navigator.pushNamed(context, "/test"),
+//                      ),
+//                    ),
+//                    SizedBox(
+//                      width: 30,
+//                    ),
+//                    Opacity(
+//                      opacity: animation.btn3Opactity.value,
+//                      child: IconButton(
+//                        icon: Icon(
+//                          Icons.star,
+//                          color: Colors.orange,
+//                        ),
+//                        iconSize: 32.0,
+//                        onPressed: () =>
+//                            Navigator.pushNamed(context, "/settings"),
+//                      ),
+//                    ),
                   ],
                 ),
               ),
             ),
-            Opacity(
-              opacity: animation.btnLogginOpacity.value,
-              child: StaggerAnimation(
-                  buttonController: loginButtonController.view),
+//            _buildPlayButton(),
+
+            _animateWidget(
+              StaggerAnimation(buttonController: loginButtonController.view),
+              animation.btnPlaySize.value,
             ),
+
+//
+//            Opacity(
+//              opacity: animation.btnFacebookOpacity.value,
+//              child: Container(
+//                padding: EdgeInsets.only(top: 150.0),
+//                child: SignInButton(
+//                  Buttons.Google,
+//                  text: "Sign up with Google",
+//                  onPressed: () {},
+//                ),
+//              ),
+//            ),
+//
+//            Opacity(
+//              opacity: animation.btnGoogleOpacity.value,
+//              child: Container(
+//                padding: EdgeInsets.only(top: 270.0),
+//                child: SignInButton(
+//                  Buttons.Google,
+////                  mini: true,
+//                  onPressed: () {},
+//                ),
+//              ),
+//            ),
+
+//            Column(
+//              crossAxisAlignment: CrossAxisAlignment.stretch,
+//              children: <Widget>[
+//                Column(
+//                  children: <Widget>[
+//                    SizedBox(height: padding),
+//                    AppleSignInButton(onPressed: () {}),
+//                    AppleSignInButton(
+//                        onPressed: () {}, style: AppleButtonStyle.whiteOutline),
+//                    AppleSignInButton(
+//                        onPressed: () {}, style: AppleButtonStyle.black),
+//                    SizedBox(height: padding),
+//                    GoogleSignInButton(onPressed: () {}),
+//                    GoogleSignInButton(onPressed: () {}, darkMode: true),
+//                    SizedBox(height: padding),
+//                    FacebookSignInButton(onPressed: () {}),
+//                    SizedBox(height: padding),
+//                    TwitterSignInButton(onPressed: () {}),
+//                    SizedBox(height: padding),
+//                    MicrosoftSignInButton(onPressed: () {}),
+//                    MicrosoftSignInButton(onPressed: () {}, darkMode: true),
+//                  ],
+//                ),
+//              ],
+//            ),
 
 //            Column(
 ////                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -131,26 +237,13 @@ class StartDetailsPage extends StatelessWidget {
 //                ),
 //              ],
 //            ),
-//            animationStatus == 0
-//                ? Padding(
-//                    padding: const EdgeInsets.only(bottom: 50.0),
-//                    child: InkWell(
-//                      onTap: () async {
-////                        setState(() {
-////                          animationStatus = 1;
-////                        });
-//                        await AudioCache().play(Constants().btnTap);
-////                        _playAnimation();
-//                      },
-//                      child: StartButton(),
-//                    ),
-//                  )
-//                : StaggerAnimation(buttonController: animation.controller.view),
-//            SizedBox(
-//              height: 100,
-//              child:             IconButton(
-//                icon: Icon(Icons.settings),
-//                onPressed: () => Navigator.pushNamed(context, "/settings"),
+
+//            Opacity(
+//              opacity: animation.btnPlayOpacity.value,
+//              child: Container(
+//                padding: EdgeInsets.only(top: 200.0),
+//                child: StaggerAnimation(
+//                    buttonController: loginButtonController.view),
 //              ),
 //            ),
           ],
@@ -174,30 +267,93 @@ class StartDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildAppName() {
+  Widget _animateWidget(Widget widget, double transformSize) {
     return new Transform(
       transform: new Matrix4.diagonal3Values(
-        animation.appNameSize.value,
-        animation.appNameSize.value,
+        transformSize,
+        transformSize,
         1.0,
       ),
       alignment: Alignment.center,
-      child: Container(
-        margin: EdgeInsets.only(bottom: 150),
-        child: Text(
-          'Open Trivia',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 60,
-            fontFamily: 'AvocadoCreamy',
+      child: widget,
+    );
+  }
+
+  Widget _buildIconButton(IconButton button, double transformSize) {
+    return new Transform(
+      transform: new Matrix4.diagonal3Values(
+        transformSize,
+        transformSize,
+        1.0,
+      ),
+      alignment: Alignment.center,
+      child: button,
+    );
+  }
+
+  Widget _buildAppName() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Transform(
+            transform: new Matrix4.diagonal3Values(
+              animation.appNameSize.value,
+              animation.appNameSize.value,
+              1.0,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'Open ',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 50,
+                fontFamily: 'AvocadoCreamy',
+              ),
+            ),
           ),
-        ),
+          Transform(
+            transform: new Matrix4.diagonal3Values(
+              animation.appNameSize2.value,
+              animation.appNameSize2.value,
+              1.0,
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'Trivia',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 70,
+                fontFamily: 'AvocadoCreamy',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
+  Widget _buildPlayButton() {
+    return Transform(
+        transform: new Matrix4.diagonal3Values(
+          animation.btnPlaySize.value,
+          animation.btnPlaySize.value,
+          1.0,
+        ),
+        alignment: Alignment.center,
+        child: Container(
+          padding: EdgeInsets.only(top: 200.0),
+          child: StaggerAnimation(buttonController: loginButtonController.view),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(timeDilation);
+//    timeDilation = 1;
+
     return Scaffold(
       body: AnimatedBuilder(
         animation: animation.controller,
@@ -262,10 +418,13 @@ class StaggerAnimation extends StatelessWidget {
   }
 
   Widget _buildAnimation(BuildContext context, Widget child) {
-//    print(buttomZoomOut.value);
+    print(buttomZoomOut.value);
     return Padding(
       padding: buttomZoomOut.value == 70
-          ? const EdgeInsets.only(bottom: 0.0)
+          ? const EdgeInsets.only(
+              bottom: 0.0,
+              top: 200, //TODO : check if OK
+            )
           : containerCircleAnimation.value,
       child: InkWell(
           onTap: () {

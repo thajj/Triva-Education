@@ -1,4 +1,4 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class Category {
   final int id;
@@ -8,28 +8,31 @@ class Category {
 }
 
 final List<Category> categories = [
-  Category(9, "General Knowledge", icon: FontAwesomeIcons.globeAsia),
-  Category(10, "Books", icon: FontAwesomeIcons.bookOpen),
-  Category(11, "Film", icon: FontAwesomeIcons.video),
-  Category(12, "Music", icon: FontAwesomeIcons.music),
-//  Category(13, "Musicals & Theatres", icon: FontAwesomeIcons.theaterMasks),
-  Category(14, "Television", icon: FontAwesomeIcons.tv),
-  Category(15, "Video Games", icon: FontAwesomeIcons.gamepad),
-  Category(16, "Board Games", icon: FontAwesomeIcons.chessBoard),
-  Category(17, "Science & Nature", icon: FontAwesomeIcons.microscope),
-  Category(18, "Computer", icon: FontAwesomeIcons.laptopCode),
-  Category(19, "Maths", icon: FontAwesomeIcons.sortNumericDown),
+  Category(9, "General Knowledge", icon: LineAwesomeIcons.globe),
+  Category(10, "Books", icon: LineAwesomeIcons.book),
+  Category(11, "Film", icon: LineAwesomeIcons.camera),
+  Category(12, "Music", icon: LineAwesomeIcons.music),
+//  Category(13, "Musicals & Theatres", icon: LineAwesomeIcons.theaterMasks),
+  Category(14, "Television", icon: LineAwesomeIcons.tv),
+  Category(15, "Video Games", icon: LineAwesomeIcons.gamepad),
+  Category(16, "Board Games"),
+  Category(17, "Science & Nature", icon: LineAwesomeIcons.flask),
+  Category(18, "Computer", icon: LineAwesomeIcons.laptop),
+  Category(19, "Maths", icon: LineAwesomeIcons.calculator),
   Category(20, "Mythology"),
-  Category(21, "Sports", icon: FontAwesomeIcons.footballBall),
-  Category(22, "Geography", icon: FontAwesomeIcons.mountain),
-  Category(23, "History", icon: FontAwesomeIcons.monument),
+  Category(21, "Sports", icon: LineAwesomeIcons.soccer_ball_o),
+  Category(22, "Geography"),
+  Category(23, "History", icon: LineAwesomeIcons.history),
   Category(24, "Politics"),
-//  Category(25, "Art", icon: FontAwesomeIcons.paintBrush),
-  Category(26, "Celebrities"),
-  Category(27, "Animals", icon: FontAwesomeIcons.dog),
-  Category(28, "Vehicles", icon: FontAwesomeIcons.carAlt),
+//  Category(25, "Art", icon: LineAwesomeIcons.paintBrush),
+  Category(26, "Celebrities", icon: LineAwesomeIcons.user),
+  Category(
+    27,
+    "Animals",
+  ),
+  Category(28, "Vehicles", icon: LineAwesomeIcons.car),
   Category(29, "Comics"),
-//  Category(30, "Science Gadgets", icon: FontAwesomeIcons.mobileAlt),
+//  Category(30, "Science Gadgets", icon: LineAwesomeIcons.mobileAlt),
   Category(31, "Japanese Anime & Manga"),
   Category(32, "Cartoon & Animation"),
 ];

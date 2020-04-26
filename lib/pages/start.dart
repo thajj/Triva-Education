@@ -26,7 +26,7 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = new AnimationController(
-      duration: const Duration(milliseconds: 3000),
+      duration: const Duration(milliseconds: 5000),
       vsync: this,
     );
     _controller.forward();
