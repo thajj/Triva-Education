@@ -15,15 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   AnimationController _screenController;
-  Animation<double> containerGrowAnimation;
-  Animation<Color> fadeScreenAnimation;
 
   @override
   void initState() {
     super.initState();
-
     _screenController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
 //    _buttonController = new AnimationController(
@@ -126,26 +122,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             child: ScaleAnimation(
                               scale: 0.5,
                               child: FadeInAnimation(
-                                  child: _buildCategoryItem(context, index)
-//                              child: Container(
-//                                width: 100,
-//                                height: 100,
-//                                margin: EdgeInsets.symmetric(
-//                                    vertical: 8.0, horizontal: 8.0),
-//                                decoration: BoxDecoration(
-//                                  color: Colors.white,
-//                                  borderRadius:
-//                                      BorderRadius.all(Radius.circular(4.0)),
-//                                  boxShadow: <BoxShadow>[
-//                                    BoxShadow(
-//                                      color: Colors.black12,
-//                                      blurRadius: 4.0,
-//                                      offset: Offset(0.0, 4.0),
-//                                    ),
-//                                  ],
-//                                ),
-//                              ),
-                                  ),
+                                  child: _buildCategoryItem(context, index)),
                             ),
                           );
                         },
