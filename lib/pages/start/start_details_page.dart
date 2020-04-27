@@ -123,7 +123,8 @@ class StartDetailsPage extends StatelessWidget {
                               color: Colors.blue),
                           splashColor: Colors.pink,
                           iconSize: 32.0,
-                          onPressed: () => _openCommingSoon(context),
+                          onPressed: () =>
+                              _openComingSoon("Statistic", context),
 //                          onPressed: () =>
 //                              Navigator.pushNamed(context, "/test"),
                         ),
@@ -137,7 +138,8 @@ class StartDetailsPage extends StatelessWidget {
                               color: Colors.black),
                           splashColor: Colors.pink,
                           iconSize: 30.0,
-                          onPressed: () => _openCommingSoon(context),
+                          onPressed: () =>
+                              _openComingSoon("Achievement", context),
 //                          onPressed: () =>
 //                              Navigator.pushNamed(context, "/test2"),
                         ),
@@ -360,7 +362,7 @@ class StartDetailsPage extends StatelessWidget {
         ));
   }
 
-  _openCommingSoon(context) {
+  _openComingSoon(title, context) {
     var alertStyle = AlertStyle(
       animationType: AnimationType.grow,
       isCloseButton: false,
@@ -375,9 +377,10 @@ class StartDetailsPage extends StatelessWidget {
 
     Alert(
       context: context,
-      title: "Comming Soon",
+      title: title,
       buttons: [],
       style: alertStyle,
+      content: Text("Coming Soon"),
     ).show();
   }
 
