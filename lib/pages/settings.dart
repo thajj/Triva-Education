@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:quiz/models/setting.dart';
+import 'package:xlive_switch/xlive_switch.dart';
 
 class SettingsPage extends StatefulWidget {
   final Setting setting;
@@ -15,8 +16,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  static final String path = "lib/src/pages/settings/settings3.dart";
-
   final TextStyle headerStyle = TextStyle(
     color: Colors.grey.shade800,
     fontWeight: FontWeight.bold,
@@ -67,61 +66,106 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 100),
-            child: Column(
-              children: <Widget>[
-                Card(
-                  elevation: 2,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 0,
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      SwitchListTile(
-                        activeColor: Colors.purple,
-                        title: Text("Sound effects"),
-                        value: widget.setting.sound,
-                        onChanged: (bool value) {
-                          widget.setting.sound = value;
-                        },
-                      ),
-                      _buildDivider(),
-                      SwitchListTile(
-                        activeColor: Colors.purple,
-                        title: Text("Vibrations"),
-                        value: widget.setting.vibration,
-                        onChanged: (bool value) {
-                          widget.setting.vibration = value;
-                        },
-                      ),
-                      _buildDivider(),
-                      SwitchListTile(
-                        activeColor: Colors.purple,
-                        title: Text("Show interactive answers"),
-                        value: widget.setting.showAnswer,
-                        onChanged: (bool value) {
-                          widget.setting.showAnswer = value;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: SettingContent(widget.setting),
           ),
         ],
       ),
     );
   }
+}
 
-  Container _buildDivider() {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 8.0,
+class SettingContent extends StatelessWidget {
+  final Setting setting;
+
+  SettingContent(this.setting);
+
+//  Widget _buildDivider() {
+//    return Container(
+//      margin: const EdgeInsets.symmetric(
+//        horizontal: 8.0,
+//      ),
+//      width: double.infinity,
+//      height: 1.0,
+//      color: Colors.grey.shade300,
+//    );
+//  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 18, left: 4, right: 4),
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text("Sound effects"),
+              XlivSwitch(
+                value: this.setting.sound,
+                onChanged: (bool value) {
+                  this.setting.sound = value;
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text("Vibrations"),
+              XlivSwitch(
+                value: this.setting.vibration,
+                onChanged: (bool value) {
+                  this.setting.vibration = value;
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text("Show correct answers"),
+              XlivSwitch(
+                value: this.setting.showAnswer,
+                onChanged: (bool value) {
+                  this.setting.showAnswer = value;
+                },
+              ),
+            ],
+          ),
+//        SwitchListTile(
+//          activeColor: Colors.purple,
+//          title: Text("Sound effects"),
+//          value: this.setting.sound,
+//          onChanged: (bool value) {
+//            this.setting.sound = value;
+//          },
+//        ),
+//        _buildDivider(),
+//        SwitchListTile(
+//          activeColor: Colors.purple,
+//          title: Text("Vibrations"),
+//          value: this.setting.vibration,
+//          onChanged: (bool value) {
+//            this.setting.vibration = value;
+//          },
+//        ),
+//        _buildDivider(),
+//        SwitchListTile(
+//          activeColor: Colors.purple,
+//          title: Text("Interactive answers"),
+//          value: this.setting.showAnswer,
+//          onChanged: (bool value) {
+//            this.setting.showAnswer = value;
+//          },
+//        ),
+        ],
       ),
-      width: double.infinity,
-      height: 1.0,
-      color: Colors.grey.shade300,
     );
   }
 }

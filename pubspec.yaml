@@ -39,11 +39,17 @@ dependencies:
   vibration: ^1.2.4
   audioplayers: ^0.15.1
   flutter_staggered_animations: ^0.1.2
-  rate_my_app: ^0.6.0+2
+#  rate_my_app: ^0.6.0+2
 #  flutter_signin_button: ^1.0.0
   #test google sign in
-  google_sign_in:
-  firebase_auth:
+  simple_animations: ^2.1.0
+  page_transition: ^1.1.5
+  xlive_switch: ^1.0.5
+  rflutter_alert: ^1.0.3
+
+#  google_sign_in:
+#  firebase_auth:
+
   #  intl: 0.16.1
 #  intl_translation: ^0.17.10
   intl:

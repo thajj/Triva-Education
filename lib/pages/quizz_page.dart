@@ -30,18 +30,10 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
+class _QuizPageState extends State<QuizPage>
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-//  GlobalKey<CountDownClipperState> _countDownClipperKey = GlobalKey();
-
-//  GlobalKey<CountDownTimerState> _countDownTimerKey = GlobalKey();
-//  GlobalKey<DemoBodyState> _waveAnimationKey = GlobalKey();
-
-  final TextStyle _questionStyle = TextStyle(
-    fontSize: 25.0,
-    fontWeight: FontWeight.w500,
-    color: Colors.white,
-  );
+//  AppLifecycleState _notification;
 
   Timer timer;
   Stopwatch stopwatch = Stopwatch();
@@ -66,6 +58,34 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   int _currentIndex = 0;
 
   final Map<int, dynamic> _answers = {};
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive) {
+      _onWillPop(true);
+    } else if (state == AppLifecycleState.resumed) {}
+//    setState(() {
+//      _notification = state;
+//    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _controller.dispose();
+    _waveController.dispose();
+    stopwatch.stop();
+    timer.cancel();
+    audioPlayer = null;
+    super.dispose();
+  }
+
+  void _startCountDown() {
+    stopwatch.reset();
+    stopwatch.start();
+    _controller.reset();
+    _controller.forward();
+  }
 
   /// Called each time the time is ticking
   void updateClock() {
@@ -126,7 +146,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     }
   }
 
-  initQuizz() {
+  void initQuizz() {
     audioPlayer = AudioPlayer();
     audioCache = AudioCache();
 
@@ -169,62 +189,24 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+
     initQuizz();
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    _waveController.dispose();
-    stopwatch.stop();
-    timer.cancel();
-    audioPlayer = null;
-    super.dispose();
-  }
-
-  void _startCountDown() {
-    stopwatch.start();
-    stopwatch.reset();
-    _controller.reset();
-    _controller.forward();
-
-//    _countDownClipperKey.currentState.reset();
-//    _countDownClipperKey.currentState.start();
-
-    //FIXME: currentState is null
-//    if (_countDownTimerKey.currentState != null) {
-//      _countDownTimerKey.currentState.reset();
-//      _countDownTimerKey.currentState.start();
-//    }
-
-//    print('START COUNTDOWN');
-//    if (_waveAnimationKey.currentState != null) {
-//      _waveAnimationKey.currentState.reset();
-//      _waveAnimationKey.currentState.start();
-//    }
-  }
-
-  void _restartCountDown() {
-    begin = 0.0;
-    _controller.reset();
-    stopwatch.stop();
-    stopwatch.reset();
-  }
+//  void _restartCountDown() {
+//    begin = 0.0;
+//    _controller.reset();
+//    stopwatch.stop();
+//    stopwatch.reset();
+//  }
 
   void _pauseTimers() {
-//    _countDownClipperKey.currentState.stop();
-//    _countDownTimerKey.currentState.pause();
-//    _waveAnimationKey.currentState.pause();
-
     _controller.stop(canceled: false);
     stopwatch.stop();
   }
 
   void _resumeTimer() {
-//    _countDownClipperKey.currentState.start();
-//    _countDownTimerKey.currentState.start();
-//    _waveAnimationKey.currentState.start();
-
     begin = 50.0;
     stopwatch.start();
     _controller.forward();
@@ -362,7 +344,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     await AudioCache().play(Constants().incorrectSound);
   }
 
-  Future<bool> _onWillPop() async {
+  Future<bool> _onWillPop([bool wasInactive = false]) async {
     _pauseTimers();
 
     return showDialog(
@@ -435,7 +417,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                               "Exit",
                               style: TextStyle(fontSize: 20),
                             ),
-                            onPressed: () => Navigator.pop(context, true),
+                            onPressed: () => wasInactive
+                                ? Navigator.pushNamed(context, "/home")
+                                : Navigator.pop(context, true),
                           ),
                         ),
                       ),
@@ -520,7 +504,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                   return _waveAnimation;
                 },
               ),
-//              DemoBody(size: size, color: Colors.pink),
 //              Visibility(
 //                visible: true,
 //                child: CountDownClipper(
@@ -539,7 +522,11 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                     HtmlUnescape()
                         .convert(widget.questions[_currentIndex].question),
                     softWrap: true,
-                    style: _questionStyle,
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/models/setting.dart';
 import 'package:quiz/pages/category.dart';
-import 'package:quiz/pages/rate_app.dart';
 import 'package:quiz/pages/settings.dart';
 import 'package:quiz/pages/start.dart';
+import 'package:quiz/pages/test_dialog.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class Router {
@@ -20,7 +20,7 @@ class Router {
 
       case '/test':
         return MyCustomRoute(
-          builder: (_) => SignInPage(),
+          builder: (_) => PopupDialog(),
           settings: settings,
         );
 

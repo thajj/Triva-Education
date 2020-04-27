@@ -36,8 +36,8 @@ class StartDetailsPageEnterAnimation {
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
-              0.600,
-              0.750,
+              0.550,
+              0.700,
               curve: Curves.elasticOut,
             ),
           ),
@@ -71,6 +71,16 @@ class StartDetailsPageEnterAnimation {
               curve: Curves.elasticOut,
             ),
           ),
+        ),
+        particleOpacity = new Tween(begin: 0.0, end: 1.0).animate(
+          new CurvedAnimation(
+            parent: controller,
+            curve: new Interval(
+              0.850,
+              0.900,
+              curve: Curves.easeIn,
+            ),
+          ),
         );
 
   final AnimationController controller;
@@ -81,4 +91,5 @@ class StartDetailsPageEnterAnimation {
   final Animation<double> btnStatSize;
   final Animation<double> btnTrophySize;
   final Animation<double> logoYTranslation;
+  final Animation<double> particleOpacity;
 }

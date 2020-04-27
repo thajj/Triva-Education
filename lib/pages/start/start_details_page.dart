@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:quiz/components/particle.dart';
+import 'package:quiz/models/setting.dart';
 import 'package:quiz/pages/start/start_page_enter_animation.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:simple_animations/simple_animations.dart';
+
+import '../settings.dart';
 
 class StartDetailsPage extends StatelessWidget {
   StartDetailsPage({
     @required AnimationController controller,
-    this.animationStatus,
     this.onPlay,
     this.loginButtonController,
   }) : animation = new StartDetailsPageEnterAnimation(controller);
@@ -14,7 +20,6 @@ class StartDetailsPage extends StatelessWidget {
   final StartDetailsPageEnterAnimation animation;
   final AnimationController loginButtonController;
   final Function onPlay;
-  final int animationStatus;
 
   Widget _buildAnimation(BuildContext context, Widget child) {
 //    return new Stack(
@@ -50,6 +55,9 @@ class StartDetailsPage extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: <Widget>[
+//            Positioned.fill(child: AnimatedBackground()),
+            Positioned.fill(child: Particles(10)),
+
             _buildLogoScroller(),
 //            Center(
 //              child: Image.asset(
@@ -101,8 +109,9 @@ class StartDetailsPage extends StatelessWidget {
                           icon: Icon(LineAwesomeIcons.cog, color: Colors.pink),
                           splashColor: Colors.pink,
                           iconSize: 32.0,
-                          onPressed: () =>
-                              Navigator.pushNamed(context, "/settings"),
+                          onPressed: () => _openSettingsDlg(context),
+//                          onPressed: () => Navigator.pushNamed(
+//                              context, Router.settingsRoute),
                         ),
                         animation.btnSettingSize.value),
                     SizedBox(
@@ -114,8 +123,9 @@ class StartDetailsPage extends StatelessWidget {
                               color: Colors.blue),
                           splashColor: Colors.pink,
                           iconSize: 32.0,
-                          onPressed: () =>
-                              Navigator.pushNamed(context, "/test"),
+                          onPressed: () => _openCommingSoon(context),
+//                          onPressed: () =>
+//                              Navigator.pushNamed(context, "/test"),
                         ),
                         animation.btnStatSize.value),
                     SizedBox(
@@ -127,8 +137,9 @@ class StartDetailsPage extends StatelessWidget {
                               color: Colors.black),
                           splashColor: Colors.pink,
                           iconSize: 30.0,
-                          onPressed: () =>
-                              Navigator.pushNamed(context, "/test2"),
+                          onPressed: () => _openCommingSoon(context),
+//                          onPressed: () =>
+//                              Navigator.pushNamed(context, "/test2"),
                         ),
                         animation.btnTrophySize.value),
 
@@ -349,6 +360,150 @@ class StartDetailsPage extends StatelessWidget {
         ));
   }
 
+  _openCommingSoon(context) {
+    var alertStyle = AlertStyle(
+      animationType: AnimationType.grow,
+      isCloseButton: false,
+      isOverlayTapDismiss: true,
+      animationDuration: Duration(milliseconds: 500),
+      titleStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 42,
+        fontFamily: 'AvocadoCreamy',
+      ),
+    );
+
+    Alert(
+      context: context,
+      title: "Comming Soon",
+      buttons: [],
+      style: alertStyle,
+    ).show();
+  }
+
+  _openSettingsDlg(context) {
+    var alertStyle = AlertStyle(
+      animationType: AnimationType.grow,
+      isCloseButton: false,
+      isOverlayTapDismiss: true,
+//      descStyle: TextStyle(fontWeight: FontWeight.bold),
+      animationDuration: Duration(milliseconds: 500),
+//      alertBorder: RoundedRectangleBorder(
+//        borderRadius: BorderRadius.circular(0.0),
+//        side: BorderSide(
+//          color: Colors.grey,
+//        ),
+      titleStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 42,
+        fontFamily: 'AvocadoCreamy',
+      ),
+    );
+    Size screenSize = MediaQuery.of(context).size;
+
+    Alert(
+      context: context,
+      title: "SETTINGS",
+
+      content: ScopedModelDescendant<Setting>(
+        builder: (context, child, settingModel) {
+          return Container(
+            width: screenSize.width,
+            child: SettingContent(settingModel),
+          );
+        },
+      ),
+      buttons: [],
+      style: alertStyle,
+
+//        content: Column(
+//          children: <Widget>[
+//            TextField(
+//              decoration: InputDecoration(
+//                icon: Icon(Icons.account_circle),
+//                labelText: 'Username',
+//              ),
+//            ),
+//            TextField(
+//              obscureText: true,
+//              decoration: InputDecoration(
+//                icon: Icon(Icons.lock),
+//                labelText: 'Password',
+//              ),
+//            ),
+//          ],
+//        ),
+//        buttons: [
+//          DialogButton(
+//            onPressed: () => Navigator.pop(context),
+//            child: Text(
+//              "LOGIN",
+//              style: TextStyle(color: Colors.white, fontSize: 20),
+//            ),
+//          )
+//        ]
+    ).show();
+  }
+
+  // Alert custom content
+  _openSettingsDlg2(context) {
+    var alertStyle = AlertStyle(
+      animationType: AnimationType.grow,
+      isCloseButton: false,
+      isOverlayTapDismiss: true,
+//      descStyle: TextStyle(fontWeight: FontWeight.bold),
+      animationDuration: Duration(milliseconds: 500),
+//      alertBorder: RoundedRectangleBorder(
+//        borderRadius: BorderRadius.circular(0.0),
+//        side: BorderSide(
+//          color: Colors.grey,
+//        ),
+//      ),
+//      titleStyle: TextStyle(
+//        color: Colors.red,
+//      ),
+    );
+
+    Alert(
+      context: context,
+      title: "Settings",
+      content: ScopedModelDescendant<Setting>(
+        builder: (context, child, settingModel) {
+          return SettingContent(settingModel);
+        },
+      ),
+      buttons: [],
+      style: alertStyle,
+
+//        content: Column(
+//          children: <Widget>[
+//            TextField(
+//              decoration: InputDecoration(
+//                icon: Icon(Icons.account_circle),
+//                labelText: 'Username',
+//              ),
+//            ),
+//            TextField(
+//              obscureText: true,
+//              decoration: InputDecoration(
+//                icon: Icon(Icons.lock),
+//                labelText: 'Password',
+//              ),
+//            ),
+//          ],
+//        ),
+//        buttons: [
+//          DialogButton(
+//            onPressed: () => Navigator.pop(context),
+//            child: Text(
+//              "LOGIN",
+//              style: TextStyle(color: Colors.white, fontSize: 20),
+//            ),
+//          )
+//        ]
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     print(timeDilation);
@@ -418,7 +573,7 @@ class StaggerAnimation extends StatelessWidget {
   }
 
   Widget _buildAnimation(BuildContext context, Widget child) {
-    print(buttomZoomOut.value);
+//    print(buttomZoomOut.value);
     return Padding(
       padding: buttomZoomOut.value == 70
           ? const EdgeInsets.only(
@@ -445,6 +600,17 @@ class StaggerAnimation extends StatelessWidget {
                       borderRadius: buttomZoomOut.value < 400
                           ? BorderRadius.all(const Radius.circular(30.0))
                           : BorderRadius.all(const Radius.circular(0.0)),
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.1, 0.8],
+                          colors: [Colors.pink, Colors.pink.shade300]),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(.1),
+                            spreadRadius: 5,
+                            blurRadius: 10)
+                      ],
                     ),
                     child: buttonSqueezeanimation.value > 75.0
                         ? Text(
@@ -480,15 +646,36 @@ class StaggerAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    buttonController.addListener(() {
-//      if (buttonController.isCompleted) {
-//        Navigator.pushReplacementNamed(context, '/home');
-////        Navigator.pushNamed(context, "/home");
-//      }
-//    });
     return AnimatedBuilder(
       builder: _buildAnimation,
       animation: buttonController,
+    );
+  }
+}
+
+class AnimatedBackground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final tween = MultiTrackTween([
+      Track("color1").add(Duration(seconds: 10),
+          ColorTween(begin: Color(0xffD38312), end: Colors.pink.withAlpha(10))),
+      Track("color2").add(Duration(seconds: 10),
+          ColorTween(begin: Color(0xffA83279).withAlpha(10), end: Colors.white))
+    ]);
+
+    return ControlledAnimation(
+      playback: Playback.MIRROR,
+      tween: tween,
+      duration: tween.duration,
+      builder: (context, animation) {
+        return Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [animation["color1"], animation["color2"]])),
+        );
+      },
     );
   }
 }

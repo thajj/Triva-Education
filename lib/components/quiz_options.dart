@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:page_transition/page_transition.dart';
 import 'package:quiz/models/category.dart';
 import 'package:quiz/models/question.dart';
 import 'package:quiz/models/setting.dart';
@@ -204,18 +205,31 @@ class _QuizOptionsDialogState extends State<QuizOptionsDialog> {
       }
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => ScopedModelDescendant<Setting>(
-            builder: (context, child, model) {
-              return QuizPage(
-                questions: questions,
-                category: widget.category,
-                setting: model,
-              );
-            },
-          ),
+        PageTransition(
+          type: PageTransitionType.downToUp,
+          child:
+              ScopedModelDescendant<Setting>(builder: (context, child, model) {
+            return QuizPage(
+              questions: questions,
+              category: widget.category,
+              setting: model,
+            );
+          }),
         ),
       );
+
+//        MaterialPageRoute(
+//          builder: (_) => ScopedModelDescendant<Setting>(
+//            builder: (context, child, model) {
+//              return QuizPage(
+//                questions: questions,
+//                category: widget.category,
+//                setting: model,
+//              );
+//            },
+//          ),
+//        ),
+//      );
     } on SocketException catch (_) {
       Navigator.pushReplacement(
           context,

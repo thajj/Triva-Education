@@ -20,13 +20,11 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
   AnimationController _controller;
   AnimationController _loginButtonController;
 
-  int _animationStatus = 0;
-
   @override
   void initState() {
     super.initState();
     _controller = new AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 3000),
       vsync: this,
     );
     _controller.forward();
@@ -42,9 +40,6 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
   }
 
   Future<Null> _onPlay() async {
-    setState(() {
-      _animationStatus = 1;
-    });
     try {
       await _loginButtonController.forward();
       await _loginButtonController.reverse();
@@ -67,7 +62,6 @@ class _StartPageState extends State<StartPage> with TickerProviderStateMixin {
     return StartDetailsPage(
       controller: _controller,
       loginButtonController: _loginButtonController,
-      animationStatus: _animationStatus,
       onPlay: _onPlay,
     );
   }
