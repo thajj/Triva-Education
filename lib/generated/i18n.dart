@@ -21,8 +21,8 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  String get tap_to_start => "Tap to start";
-  String get title => "Home";
+  String get tap_to_start => "JOUER";
+  String get title => "playBtn";
 }
 
 class $en extends S {
@@ -36,9 +36,9 @@ class $fr extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get tap_to_start => "Tap to start";
+  String get tap_to_start => "PLAY";
   @override
-  String get title => "Home";
+  String get title => "playBtn";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
